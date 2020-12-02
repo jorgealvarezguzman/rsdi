@@ -2,6 +2,7 @@
 	<head>
 		<link href='styles.css' rel='stylesheet'>
 		<meta charset="utf-8"/>
+		<script src="drag&drop.js"></script>
 	</head>
 	<body style="margin:0px;">
 	 <div style="width: 1440px; height: 100%; position:relative; margin:auto;"> 
@@ -20,29 +21,35 @@
 
 			<div class='sk-asset sk-upload-field-4B782129-F489-47C7-A62A-6FCB3F5C56F6'>
 				<div class='sk-asset sk-Rectangle-B7B8647B-A0B6-424E-B489-D0FB95D9F6AE'></div>
+				
+				<div id="drop_zone" ondrop="dropHandler(event);" ondragover="dragOverHandler(event);" class='sk-asset sk-Rectangle-B7B8647B-A0B6-424E-B489-D0FB95D9F6AE'>
+					
+				</div>
+				
 				<div class='sk-asset sk-Arrastre-y-suelte-la-BD3C50BD-922A-47FD-9623-640893955D3D'><span class="span1">Arrastre y suelte la imagen aquí <br>o <br>búsquela</span></div>
 				<div class='sk-asset sk-materialiconcloud_upload-E15C8457-4295-4445-921B-1F13551B5DA5'>
 					<div class='sk-asset sk-Path-41CA34F3-B510-4C04-B600-AD95E324E916'></div>
-					<div class='sk-asset sk-Shape-1629D692-9ED7-4822-BEC6-2CA71D9DDC85'></div>
+					<div class='sk-asset sk-Shape-1629D692-9ED7-4822-BEC6-2CA71D9DDC85'><input type="file" id="myFile" name="filename"></div>
 				</div>
 			</div>
 
 			<div class='sk-asset sk-INPUT-Descripcion-CF64A039-EB37-4E7F-B4EC-08701AE44149'>
-				<textarea type="text" name="descripcion" id="descripcion" class='sk-asset sk-Rectangle-2-Copy-5F9BDE28-2387-46E3-9166-7F05EDC998B2'></textarea>
 
-				<div class='sk-asset sk-Descripcin-AB9475E6-A401-4978-A86E-185BB465DB89'><span class="span1">Descripción</span></div>
+				<textarea type="text" name="descripcion" id="descripcion" placeholder="Descripción" class='sk-asset sk-Rectangle-2-Copy-5F9BDE28-2387-46E3-9166-7F05EDC998B2'></textarea>
+
 			</div>
 			<div class='sk-asset sk-INPUT-Name-CFEF16AD-5C1C-47DF-8ACE-49545E8AF297'>
-				<input type="text" name="nombre" id="nombre" class='sk-asset sk-Rectangle-2-39D6629A-EC63-4A10-A674-A9229073B27A'/>
-
-				<div class='sk-asset sk-Nombre-8C704F9B-4A13-4CAF-8F37-50ED6816FE0B'><span class="span1">Nombre</span></div>
+				
+				<input type="text" name="nombre" id="nombre" placeholder="Nombre" class='sk-asset sk-Rectangle-2-39D6629A-EC63-4A10-A674-A9229073B27A'/>
+				
 			</div>
 			<div class='sk-asset sk-Head-8EA2DEF6-63D5-4144-BEAB-C6BE24A70221'>
 				<div class='sk-asset sk-Agregar-Imagen-E29D98EA-F043-4899-8C6F-86245EC2F7AD'><span class="span1">Agregar Imagen</span></div>
 			</div>
 			<div class='sk-asset sk-BTN-Register-BE564820-F3CD-4999-B0E0-5B1E9F770800'>
-				<div class='sk-asset sk-Rectangle-2-Copy-3-ED038D5A-8C35-4D6D-8FB6-B59F90065482'></div>
-				<div class='sk-asset sk-Agregar-0C9E7BC0-B22D-46F0-A5F2-E28CCD75A834'><span class="span1">Agregar</span></div>
+
+				<input type="submit" value="Agregar" class='sk-asset sk-Rectangle-2-Copy-3-ED038D5A-8C35-4D6D-8FB6-B59F90065482'/>
+
 			</div>
 			</form>
 		</div>
