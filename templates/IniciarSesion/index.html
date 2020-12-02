@@ -1,35 +1,28 @@
-<html>
-	<head>
-		<link href='styles.css' rel='stylesheet'>
-		<meta charset="utf-8"/>
-	</head>
-	<body style="margin:0px;">
-	 <div style="width: 1440px; height: 100%; position:relative; margin:auto;"> 
-		<div class='sk-ab sk-Desk'>
-			<div class='sk-asset sk-solid-white-bg-0275A90B-8DEE-4571-B94C-88DCF63D4915'></div>
-			<div class='sk-asset sk-transparent-bg-0DAB02A5-6AB8-4B76-A952-11001756DF68'></div>
-			<div class='sk-asset sk-Rect-CBB3B5F1-51A0-45D4-AE01-9EC24D334E25'></div>
-			<div class='sk-asset sk-Recordarme-AA3CBBFF-6443-4C8A-9A0D-DB5728083631'><span class="span1">Recordarme</span></div>
-			<div class='sk-asset sk-Rectangle-18-EA087430-2B07-492C-B508-A982750C8F4D'></div>
-			<div class='sk-asset sk-Log-In-14AED71A-034C-4788-B8AD-434C70543B19'><span class="span1">¿Olvido su contraseña? </span><span class="span2">Recupérela.</span></div>
-			<div class='sk-asset sk-Divider-02A732BF-8B4F-46F5-8E2B-92B2005D8209'></div>
-			<div class='sk-asset sk-BTN-Register-35C38B71-DCE0-4243-A718-8F32CB630AB4'>
-				<div class='sk-asset sk-Rectangle-2-Copy-3-193926E6-D325-4DA6-BCF2-367A0B7F4C85'></div>
-				<div class='sk-asset sk-Iniciar-Sesin-FF2B82E7-3ADD-49C0-A96B-6E4EB536724A'><span class="span1">Iniciar Sesión</span></div>
-			</div>
-			<div class='sk-asset sk-INPUT-Password-812E320F-26EB-43C8-A741-023E090A2982'>
-				<div class='sk-asset sk-Rectangle-2-Copy-2-E8900629-35E1-4151-B1D5-DAB28413A679'></div>
-				<div class='sk-asset sk--3272EFAD-323E-4411-BBAF-0E15DA1F99EA'><span class="span1">************</span></div>
-				<div class='sk-asset sk-Contrasea-9E67B2A1-3B8A-4A18-AF77-F55CE2E77522'><span class="span1">Contraseña</span></div>
-			</div>
-			<div class='sk-asset sk-INPUT-Name-8BF6557E-1E84-423C-B10B-258AF457F8F5'>
-				<div class='sk-asset sk-Rectangle-2-7AB96F12-C970-428B-B099-121C49921E3D'></div>
-				<div class='sk-asset sk-Usuario-051D021B-ED5A-4343-AA46-FBD45A749D71'><span class="span1">Usuario</span></div>
-			</div>
-			<div class='sk-asset sk-Head-7AFB20FA-2806-4604-98FA-54867EE21729'>
-				<div class='sk-asset sk-Iniciar-Sesin-45009C32-D865-4DB5-AFBC-C9A4B9DBBDF0'><span class="span1">Iniciar Sesión</span></div>
-			</div>
-		</div>
-	</div>
-	</body>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form id="forma1" method="POST">
+        <h2>Iniciar Sesión</h2>
+        <br><br><br>
+        <input type="text" name="usuario" id="usuario" placeholder="Usuario">
+        <br><br>
+        <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña">
+        <br><br><br>
+        <input type="submit" name="iniciarSesion" value="Iniciar Sesión" id="botonIniciarSesion">
+        <br><br><br>
+        <input type="checkbox" name="recordarme" id="recordarme">
+        <label for="recordarme" id="recordarmeLabel"> Recordarme</label>
+        
+        <br><br>
+        <p id="textOlvideContrasena">¿Olvidó su contraseña?  </div> 
+        <a id="recuperarContrasena" href="https://www.google.com/" target="_blank">Recupérela</a>
+    </form>
+
+</body>
 </html>
