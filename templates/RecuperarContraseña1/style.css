@@ -132,7 +132,8 @@ only screen and (min-device-pixel-ratio: 3) {
 	vertical-align: top;
     font-size: 24.56953642384106.0px ;
     background-image: url("images/BTN-Register-F7B63F07-B3FC-479C-9BAA-A8CFA205D354.png");
-    background-size: 355px 67px;
+	background-size: 355px 67px;
+	border: none;
 }
 
 .sk-asset.sk-BTN-Register-F7B63F07-B3FC-479C-9BAA-A8CFA205D354 {
@@ -206,7 +207,8 @@ only screen and (min-device-pixel-ratio: 3) {
     height: 61px;
     font-family: "Helvetica Neue" ;
     font-weight: 300 ;
-    font-size: 28px ;
+	font-size: 28px ;
+	padding: 10px;
 }
 
 .sk-asset.sk-Recuperar-Contrasea-63CA6D34-7D80-44A2-BF23-4D19D4AADFFC {
