@@ -1,5 +1,6 @@
 body{
     background-color: #a595e6;
+    font-family: "Helvetica Neue";
 }
 
 h2{
@@ -11,7 +12,6 @@ h2{
     padding: 5%;
     background:#ffffff;
     text-align: center;
-    font-family: Arial, Helvetica, sans-serif;
 
     border-radius: 1.3%;
 
