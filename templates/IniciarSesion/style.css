@@ -3,20 +3,19 @@ body{
 }
 
 #forma1{
-    width: min-content;
-    height: min-content;
+    display: table;
     padding: 5%;
     background:#ffffff;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
 
+    border-radius: 1.3%;
+
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    border-radius: 1.5%;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 #botonIniciarSesion{
@@ -39,8 +38,8 @@ input{
     padding-right: 3%;
 }
 #recordarme{
-    min-width: min-content;
-    min-height: min-content;
+    min-width: 2px;
+    min-height: 2px;
     float: left;
 }
 #recordarmeLabel{
