@@ -51,13 +51,24 @@ input{
     padding-left: 1%;
 }
 
+#textOlvideContrasena{
+    color: dimgray;
+}
+
 #recuperarContrasena{
     color: rgb(65, 102, 223);
     text-decoration: none;
 }
-#textOlvideContrasena{
+
+#textNoTieneCuenta{
     color: dimgray;
 }
+
+#registrese{
+    color: rgb(65, 102, 223);
+    text-decoration: none;
+}
+
 h2{
     color: rgb(105, 104, 104);
 }
