@@ -5,14 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión</title>
     <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="validacion.js"></script>
 </head>
 <body>
-    <form id="forma1" method="POST">
+    <form id="forma1" method="POST" onsubmit="return validarDatos();">
         <h2>Iniciar Sesión</h2>
         <br><br><br>
-        <input type="text" name="usuario" id="usuario" placeholder="Usuario">
+        <div id="mensajeIngresarUsuario">
+            <p>Especifica tu dirección de correo electrónico</p>
+        </div>
+        <div id="mensajeDatosIncorrectos">
+            <p>El correo electrónico o la contraseña no son válidos</p>
+        </div>
+        <input type="text" name="usuario" id="usuario" placeholder="Usuario" oninput="limpiarAlertasUsuario();">
         <br><br>
-        <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña">
+        <div id="mensajeIngresarContraseña">
+            <p>Ingresa tu contraseña</p>
+        </div>
+        <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" oninput="limpiarAlertasContraseña();">
         <br><br><br>
         <input type="submit" name="iniciarSesion" value="Iniciar Sesión" id="botonIniciarSesion">
         <br><br><br>
@@ -22,10 +32,6 @@
         <br><br>
         <p id="textOlvideContrasena">¿Olvidó su contraseña?  </div> 
         <a id="recuperarContrasena" href="https://www.google.com/" target="_blank">Recupérela</a>
-
-        <p id="textOlvideContrasena">¿No tiene cuenta?  </div> 
-        <a id="recuperarContrasena" href="https://www.google.com/" target="_blank">Regístrese</a>
     </form>
-
 </body>
 </html>

@@ -5,14 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperar Contraseña</title>
     <link rel="stylesheet" href="style.css">
+    <script src="validacion.js"></script>
 </head>
 <body>
-    <form id="forma1" method="POST">
+    <form id="forma1" method="POST" onsubmit="return validarDatos();">
         <h2>Recuperar Contraseña</h2>
         <br><br><br>
-        <input type="password" name="contrasena" id="contrasena" placeholder="Nueva Contraseña">
+        <div id="mensajeIngresarContraseña">
+            <p>Ingresa tu nueva contraseña</p>
+        </div>
+        <div id="mensajeContraseñaNoCoincide">
+            <p>Las contraseñas no coinciden</p>
+        </div>
+        <input type="password" name="contrasena" id="contrasena" placeholder="Nueva Contraseña" oninput="limpiarAlertasContraseña();">
         <br><br><br>
-        <input type="password" name="confirmarContrasena" id="confirmarContrasena" placeholder="Confirmar Contraseña">
+        <div id="mensajeConfirmarContraseña">
+            <p>Confirma tu nueva contraseña</p>
+        </div>
+        <input type="password" name="confirmarContrasena" id="confirmarContrasena" placeholder="Confirmar Contraseña" oninput="limpiarAlertasConfirmarContraseña();">
         <br><br><br>
         <input type="submit" name="guardar" value="Guardar" id="botonGuardar">
         <br><br><br>
