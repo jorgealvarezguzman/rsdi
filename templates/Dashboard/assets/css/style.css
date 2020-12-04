@@ -1,5 +1,5 @@
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "Open Sans", sans-serif;
   color: #444444;
 }
 
@@ -236,7 +236,7 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
-/* Get Startet Button 
+/* Get Startet Button */
 .get-started-btn {
   margin-left: 25px;
   color: #fff;
@@ -261,7 +261,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 6px 20px 7px 20px;
   }
 }
-*/
+
 
 /* Mobile Navigation */
 .mobile-nav-toggle {
@@ -554,6 +554,16 @@ section {
   color: #fff;
   transition: 0.3s;
 }
+
+.portfolio .portfolio-item .portfolio-info .edit-link {
+  position: absolute;
+  right: 100px;
+  font-size: 24px;
+  top: calc(50% - 18px);
+  color: #fff;
+  transition: 0.3s;
+}
+
 
 .portfolio .portfolio-item .portfolio-info .preview-link:hover, .portfolio .portfolio-item .portfolio-info .details-link:hover {
   color: #47b2e4;
