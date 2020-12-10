@@ -1,6 +1,6 @@
-from flask import Flask
-from flask import render_template
-from flask import request
+from flask import Flask, render_template, request, redirect
+import yagmail
+import utils
 #from flask import jsonify
 
 app = Flask(__name__)
@@ -32,7 +32,22 @@ def imagen_guardar():
         redirect("/imagen_crear")
         #return jsonify(mensaje='Lo sentimos, no se puede acceder al recurso', tipo="bad")
 
+@app.route('/recuperacion', methods=['GET','POST'])
+def recuperacion():
+    if (request.method== 'POST'):
+        email = request.form['email']
+        if not utils.isEmailValid(email):
+            return render_template('recuperarContraseña1/index.html')
+        yag = yagmail.SMTP('misiontic2022grupo11@gmail.com','2022Grupo11')
+        yag.send(to=email,subject='Recuperacion de contraseña',contents='Entra al siguiente link para reestablecer tu cuenta')
+        return render_template('recuperarContraseña2/index.html')
+    else:
+        return render_template('recuperarContraseña1/index.html')
 
+@app.route('/imagen_borrar')
+def borrar():
+    #funcion para borrar la imagen de la base de datos
+    return redirect('/')
 
 @app.route('/logout')
 def logout():
