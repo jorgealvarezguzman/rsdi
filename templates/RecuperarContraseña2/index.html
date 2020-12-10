@@ -17,7 +17,7 @@
         <div id="mensajeContraseñaNoCoincide">
             <p>Las contraseñas no coinciden</p>
         </div>
-        <input type="password" name="contrasena" id="contrasena" placeholder="Nueva Contraseña" oninput="limpiarAlertasContraseña();">
+        <input type="password" name="contrasena" id="contrasena" placeholder="Nueva Contraseña" oninput="limpiarAlertasContraseña(); action="{{ url_for('login')}}">
         <br><br><br>
         <div id="mensajeConfirmarContraseña">
             <p>Confirma tu nueva contraseña</p>
