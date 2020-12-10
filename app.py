@@ -94,7 +94,7 @@ def logout():
     
 @app.route('/imagen_actualizar/')
 def actualizarImagen():
-    return render_template('ActualizarImagen/index.html')
+    return render_template('actualizarImagen.html')
 
 @app.route("/login/", methods=('GET', 'POST'))
 def login():
