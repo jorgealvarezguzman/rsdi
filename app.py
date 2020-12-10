@@ -10,7 +10,7 @@ sesion = True
 @app.route('/')
 def index():
     sesion = request.args.get('sesion')
-    if sesion == 1:
+    if sesion == "1":
         return render_template("Dashboard/inicio.html")
     else:
         return render_template("Principal/inicio.html")
