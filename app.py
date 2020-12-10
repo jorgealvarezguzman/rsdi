@@ -1,10 +1,11 @@
-from flask import Flask
-from flask import render_template
-from flask import request
+from flask import Flask, render_template, request, url_for, flash
+import yagmail
+import utils
 #from flask import jsonify
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='templates')
 sesion = True
+
 @app.route('/')
 def index():
     #sesion = True
@@ -32,6 +33,40 @@ def imagen_guardar():
         redirect("/imagen_crear")
         #return jsonify(mensaje='Lo sentimos, no se puede acceder al recurso', tipo="bad")
 
+
+@app.route('/registro/', methods = ["GET", "POST"])
+def registro():
+    try:
+        if request.method == 'POST':
+            username = request.form['usuario']
+            password = request.form['password']
+            email = request.form['email']
+            error = None
+
+            if not utils.isUsernameValid(username):
+                error = "El usuario debe ser alfanumerico o incluir solo '.','_','-'"
+                flash(error)
+                return render_template('Registro/index.html')
+
+            if not utils.isPasswordValid(password):
+                error = 'La contraseña debe contenir al menos una minúscula, una mayúscula, un número y 8 caracteres'
+                flash(error)
+                return render_template('Registro/index.html')
+
+            if not utils.isEmailValid(email):
+                error = 'Correo invalido'
+                flash(error)
+                return render_template("Registro/index.html")
+
+            yag = yagmail.SMTP('misiontic2022grupo11@gmail.com', '2022Grupo11')
+            yag.send(to=email, subject='Activa tu cuenta',
+                     contents='Bienvenido, usa este link para activar tu cuenta ')
+            flash('Revisa tu correo para activar tu cuenta')
+            return render_template('IniciarSesion/index.html')
+        
+        return render_template('Registro/index.html')
+    except:
+        return render_template('Registro/index.html')
 
 
 @app.route('/logout')
