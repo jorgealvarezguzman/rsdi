@@ -108,7 +108,7 @@ def login():
             if username == "test" and password == "test1234":
                 return redirect('/?sesion=1')
             else:
-                error = "El correo electrónico o la contraseña no son validos"
+                error = u"El correo electrónico o la contraseña no son validos"
                 return render_template("IniciarSesion.html", error1 = error)
 
         return render_template("IniciarSesion.html")
