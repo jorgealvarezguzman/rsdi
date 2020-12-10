@@ -89,3 +89,24 @@ def registro():
 def logout():
     sesion = False
     
+
+@app.route("/login/", methods=('GET', 'POST'))
+def login():
+    try:
+        if request.method == 'POST':
+            username = request.form['usuario']
+            password = request.form['contrasena']
+            recordarme = False
+
+            if request.form.get('recordarme'):
+                recordarme = True
+
+            if username == "test" and password == "test1234":
+                return redirect('/?sesion=1')
+            else:
+                error = u"El correo electrónico o la contraseña no son validos"
+                return render_template("IniciarSesion/index.html", error1 = error)
+
+        return render_template("IniciarSesion/index.html")
+    except:
+        return render_template("IniciarSesion/index.html")
