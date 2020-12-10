@@ -3,7 +3,7 @@ import yagmail
 import utils
 #from flask import jsonify
 
-app = Flask(__name__, static_folder='templates')
+app = Flask(__name__)
 sesion = True
 
 @app.route('/')
@@ -62,30 +62,33 @@ def registro():
             if not utils.isUsernameValid(username):
                 error = "El usuario debe ser alfanumerico o incluir solo '.','_','-'"
                 flash(error)
-                return render_template('Registro/index.html')
+                return render_template('registro.html')
 
             if not utils.isPasswordValid(password):
                 error = 'La contraseña debe contenir al menos una minúscula, una mayúscula, un número y 8 caracteres'
                 flash(error)
-                return render_template('Registro/index.html')
+                return render_template('registro.html')
 
             if not utils.isEmailValid(email):
                 error = 'Correo invalido'
                 flash(error)
-                return render_template("Registro/index.html")
+                return render_template("registro.html")
 
             yag = yagmail.SMTP('misiontic2022grupo11@gmail.com', '2022Grupo11')
             yag.send(to=email, subject='Activa tu cuenta',
                      contents='Bienvenido, usa este link para activar tu cuenta ')
             flash('Revisa tu correo para activar tu cuenta')
-            return render_template('IniciarSesion/index.html')
+            return redirect('login')
         
-        return render_template('Registro/index.html')
+        return render_template('registro.html')
     except:
-        return render_template('Registro/index.html')
+        return render_template('registro.html')
 
 
 @app.route('/logout')
 def logout():
     sesion = False
     
+@app.route('/imagen_actualizar/')
+def actualizarImagen():
+    return render_template('ActualizarImagen/index.html')
