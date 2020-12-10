@@ -79,7 +79,7 @@ def registro():
             yag.send(to=email, subject='Activa tu cuenta',
                      contents='Bienvenido, usa este link para activar tu cuenta ')
             flash('Revisa tu correo para activar tu cuenta')
-            return redirect('login')
+            return redirect('/login')
         
         return render_template('registro.html')
     except:
