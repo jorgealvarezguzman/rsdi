@@ -110,4 +110,20 @@ def login():
 
         return render_template("IniciarSesion.html")
     except:
+<<<<<<< HEAD
         return render_template("IniciarSesion.html")
+=======
+        return render_template("IniciarSesion/index.html")
+
+    
+@app.route('/imagen_crear', methods=["POST", "GET"])
+def crearimagen():
+    if request.method == "GET":
+        return render_template("crear3.html")
+    else:
+        return render_template("crear3.html")
+
+@app.route('/imagensubida/', methods=["POST","GET"])
+def imagen():
+    return render_template("imagensubida.html")
+>>>>>>> 506140d667a9cf559a05911553d3d13a430ed459
