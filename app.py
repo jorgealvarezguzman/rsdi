@@ -2,9 +2,11 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
 import yagmail
 import utils
+import os
 #from flask import jsonify
 
 app = Flask(__name__)
+app.secret_key = os.urandom(12)
 sesion = True
 
 @app.route('/')
@@ -79,7 +81,7 @@ def registro():
             yag.send(to=email, subject='Activa tu cuenta',
                      contents='Bienvenido, usa este link para activar tu cuenta ')
             flash('Revisa tu correo para activar tu cuenta')
-            return redirect('login')
+            return redirect(url_for('login'))
         
         return render_template('registro.html')
     except:
