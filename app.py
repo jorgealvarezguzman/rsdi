@@ -4,7 +4,7 @@ import yagmail
 import utils
 #from flask import jsonify
 
-app = Flask(__name__, static_folder='templates')
+app = Flask(__name__)
 sesion = True
 
 @app.route('/')
@@ -110,10 +110,7 @@ def login():
 
         return render_template("IniciarSesion.html")
     except:
-<<<<<<< HEAD
         return render_template("IniciarSesion.html")
-=======
-        return render_template("IniciarSesion/index.html")
 
     
 @app.route('/imagen_crear', methods=["POST", "GET"])
@@ -126,4 +123,3 @@ def crearimagen():
 @app.route('/imagensubida/', methods=["POST","GET"])
 def imagen():
     return render_template("imagensubida.html")
->>>>>>> 506140d667a9cf559a05911553d3d13a430ed459
