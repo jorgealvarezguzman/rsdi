@@ -106,8 +106,8 @@ def login():
                 return redirect('/?sesion=1')
             else:
                 error = u"El correo electrónico o la contraseña no son validos"
-                return render_template("IniciarSesion/index.html", error1 = error)
+                return render_template("IniciarSesion.html", error1 = error)
 
-        return render_template("IniciarSesion/index.html")
+        return render_template("IniciarSesion.html")
     except:
-        return render_template("IniciarSesion/index.html")
+        return render_template("IniciarSesion.html")
