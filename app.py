@@ -38,11 +38,11 @@ def imagen_guardar():
 def registro():
     try:
         if request.method == 'POST':
-            username = request.form['usuario']
+            username = request.form['name']
             password = request.form['password']
-            email = request.form['email']
+            email = request.form['correo']
             error = None
-
+            
             if not utils.isUsernameValid(username):
                 error = "El usuario debe ser alfanumerico o incluir solo '.','_','-'"
                 flash(error)

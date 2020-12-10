@@ -5,9 +5,16 @@
 		<title>Registro</title>
 	</head>
 	<body style="margin:0px;">
+	
+	<section class="content">
+		{% for message in get_flashed_messages() %}
+			<div class="flash">{{ message }}</div>
+		{% endfor %}
+	</section>
+
 	 <div style="width: 1440px; height: 100%; position:relative; margin:auto;"> 
 		<div class='sk-ab sk-Desktop'>
-			<form method="POST">
+			<form method="POST" action="{{ url_for('registro')}}">
 			<div class='sk-asset sk-solid-white-bg-2D949D4D-C9F6-499A-AA60-C8E374978D11'></div>
 			<div class='sk-asset sk-transparent-bg-3AEDF8DF-ED68-4AC1-836E-528ECEBC5E7B'></div>
 			<div class='sk-asset sk-Rect-769BC27E-B572-446F-AF5B-50F3513C2F12'></div>
