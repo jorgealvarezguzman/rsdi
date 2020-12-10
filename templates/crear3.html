@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Imagen</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/csscrear.css')}}" />
+
+</head>
+
+<body>
+
+    <a>
+        <h1>Sube y comparte tus imágenes.</h1>
+    </a>
+
+    <a data-trigger="anywhere-upload-input" class="btn btn-big blue">Comienza a subir</a></div>
+
+    <div class="upload-box-status-text">Puedes <a data-trigger="anywhere-upload-input">explorar desde tu computadora</a>
+        o <a data-modal="form" data-target="anywhere-upload-paste-url">agregar URLs de imagen</a>.</div>
+    </div>
+    </div>
+    </div>
+    <form method="POST" action="/imagen_guardar" enctype='multipart/form-data'>
+        <input id="anywhere-upload-input" data-action="anywhere-upload-input" class="hidden-visibility" type="file"
+            accept="image/*, .jpg,.png,.bmp,.gif,.tif,.webp,.heic,.pdf,.jpeg,.tiff,.heif" multiple="" name="imagen">
+
+        <ul id="anywhere-upload-queue" class="upload-box-queue content-width soft-hidden" data-group="upload-queue">
+        </ul>
+        <div id="anywhere-upload-submit" class="btn-container text-align-center margin-bottom-0 soft-hidden"
+            data-group="upload-queue-ready">
+            <div data-group="upload-queue-ready">
+            </div>
+
+            <div class="image-preview"></div>
+            <div class="input-label">
+                <label for="form-title">Título <span class="optional">opcional</span></label>
+                <input type="text" id="form-title" name="titulo" class="text-input" value="" maxlength="100">
+
+
+                <div class="input-label"><label for="form-description">Descripción <span
+                            class="optional">opcional</span></label><textarea id="form-description"
+                        name="form-description" class="text-input no-resize"
+                        placeholder="Breve descripción de esta imagen"></textarea></div>
+            </div>
+
+            <!-- <label for="form-album-name">Nombre del álbum</label>
+            <input type="text" name="form-album-name" class="text-input" value="" placeholder="Nombre del álbum"
+                maxlength="100" required=""> -->
+        </div>
+        <!-- <div class="input-label">
+            <label for="form-album-description">Descripción del ábum <span class="optional">opcional</span></label>
+            <textarea id="form-album-description" name="form-album-description" class="text-input no-resize"
+                placeholder="Breve descripción de este álbum"></textarea>
+        </div> -->
+        <div class="input-label overflow-auto">
+            <div class="c7 grid-columns">
+                <label for="form-privacy">Privacidad del álbum</label>
+                <select name="form-privacy" id="form-privacy" class="text-input" data-combo="form-privacy-combo"
+                    rel="template-tooltip" data-tiptip="right" data-title="Quién puede ver este contenido" name="acceso">
+                    <option value="public">Público</option>
+                    <option value="private_but_link">Privado (cualquiera con el enlace)</option>
+                    <!-- <option value="password">Privado (protegido con contraseña)</option> -->
+                </select>
+            </div>
+        </div>
+        <!-- <div id="form-privacy-combo">
+            <div data-combo-value="password" class="switch-combo soft-hidden">
+                <div class="input-label overflow-auto">
+                    <div class="c7 grid-columns">
+                        <label for="form-album-password">Contraseña del álbum</label>
+                        <input type="text" name="form-album-password" class="text-input" value="" data-required="">
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+        <button class="btn btn-big green" id="POST-name" name="name" data-action="upload">Subir</button>
+    </form>
+
+</body>
+
+</html>

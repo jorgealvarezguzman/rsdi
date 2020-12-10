@@ -1,3 +1,4 @@
+# encoding: utf-8
 from flask import Flask, render_template, request, redirect, url_for, flash
 import yagmail
 import utils
@@ -8,8 +9,8 @@ sesion = True
 
 @app.route('/')
 def index():
-    #sesion = True
-    if sesion == True:
+    sesion = request.args.get('sesion')
+    if sesion == "1":
         return render_template("Dashboard/inicio.html")
     else:
         return render_template("Principal/inicio.html")
@@ -92,3 +93,36 @@ def logout():
 @app.route('/imagen_actualizar/')
 def actualizarImagen():
     return render_template('ActualizarImagen/index.html')
+
+@app.route("/login/", methods=('GET', 'POST'))
+def login():
+    try:
+        if request.method == 'POST':
+            username = request.form['usuario']
+            password = request.form['contrasena']
+            recordarme = False
+
+            if request.form.get('recordarme'):
+                recordarme = True
+
+            if username == "test" and password == "test1234":
+                return redirect('/?sesion=1')
+            else:
+                error = "El correo electrónico o la contraseña no son validos"
+                return render_template("IniciarSesion.html", error1 = error)
+
+        return render_template("IniciarSesion.html")
+    except:
+        return render_template("IniciarSesion.html")
+
+    
+@app.route('/imagen_crear', methods=["POST", "GET"])
+def crearimagen():
+    if request.method == "GET":
+        return render_template("crear3.html")
+    else:
+        return render_template("crear3.html")
+
+@app.route('/imagensubida/', methods=["POST","GET"])
+def imagen():
+    return render_template("imagensubida.html")

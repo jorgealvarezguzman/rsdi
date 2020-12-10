@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styleLogin.css') }}">
+    <script type="text/javascript" src="{{ url_for('static', filename='js/validacionLogin.js') }}"></script>
+</head>
+<body>
+    <form id="forma1" method="POST" onsubmit="return validarDatos();">
+        <h2>Iniciar Sesión</h2>
+        <br><br><br>
+        <div id="mensajeIngresarUsuario">
+            <p>Ingresa tu correo</p>
+        </div>
+
+        <div id="mensajeDatosIncorrectos">
+            <p>
+                {{ error1 }}
+            </p>
+        </div>
+
+        <input type="text" name="usuario" id="usuario" placeholder="Usuario" oninput="limpiarAlertasUsuario();">
+        <br><br>
+        <div id="mensajeIngresarContraseña">
+            <p>Ingresa tu contraseña</p>
+        </div>
+        <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" oninput="limpiarAlertasContraseña();">
+        <br><br><br>
+        <input type="submit" name="iniciarSesion" value="Iniciar Sesión" id="botonIniciarSesion">
+        <br><br><br>
+        <input type="checkbox" name="recordarme" id="recordarme">
+        <label for="recordarme" id="recordarmeLabel"> Recordarme</label>
+        
+        <br><br>
+        <p id="textOlvideContrasena">¿Olvidó su contraseña?  </div> 
+        <a id="recuperarContrasena" href="/recuperacion">Recupérela</a>
+        <p id="textNoTieneCuenta">¿No tiene Cuenta?  </div> 
+        <a id="registrese" href="/registro/">Regístrese</a>
+    </form>
+</body>
+</html>
