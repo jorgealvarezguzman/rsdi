@@ -119,7 +119,7 @@ def login():
                 return redirect('/?sesion=1')
             else:
                 error = u"El usuario o la contraseña no son validos"
-                return render_template("IniciarSesion.html", error1 = error)
+                return render_template("IniciarSesion.html", error1 = error, usuario = username, password=password)
 
         return render_template("IniciarSesion.html")
     except:

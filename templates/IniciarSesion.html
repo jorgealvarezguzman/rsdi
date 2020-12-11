@@ -21,12 +21,12 @@
             </p>
         </div>
 
-        <input type="text" name="usuario" id="usuario" placeholder="Usuario" oninput="limpiarAlertasUsuario();">
+        <input type="text" name="usuario" id="usuario" placeholder="Usuario" oninput="limpiarAlertasUsuario();" value="{{ usuario }}">
         <br><br>
         <div id="mensajeIngresarContraseña">
             <p>Ingrese la contraseña</p>
         </div>
-        <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" oninput="limpiarAlertasContraseña();">
+        <input type="password" name="contrasena" id="contrasena" placeholder="Contraseña" oninput="limpiarAlertasContraseña();" value="{{ password }}">
         <br><br><br>
         <input type="submit" name="iniciarSesion" value="Iniciar Sesión" id="botonIniciarSesion">
         <br><br><br>
