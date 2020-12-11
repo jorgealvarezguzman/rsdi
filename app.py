@@ -25,15 +25,20 @@ def descargar():
 @app.route('/imagen_guardar', methods=["POST"])
 def imagen_guardar():
     if request.method == 'POST':
-        nombre = request.form['nombre']
-        desc = request.form['descripcion']
-        acceso = request.form['acceso']
-        #algoritmo para almacenar la imagen en carpeta destino
-        #algoritmo para almacenar los datos de la imagen en DB
-        #return jsonify(mensaje='Imagen guardada con exito', tipo="ok")
-        redirect("/imagen_crear")
+        nombre = request.form['titulo']
+        desc = request.form['form-description']
+        acceso = request.form['form-privacy']
+        #imagen_file = request.form['imagen']
+        if nombre != "" and desc != "" and acceso != "":
+            print(request.form)
+            #algoritmo para almacenar la imagen en carpeta destino
+            #algoritmo para almacenar los datos de la imagen en DB
+            #return jsonify(mensaje='Imagen guardada con exito', tipo="ok")
+            return redirect("/imagen_crear?msg=guardados")
+        else:
+            return redirect("/imagen_crear?msg=datos")
     else:
-        redirect("/imagen_crear")
+        return redirect("/imagen_crear")
         #return jsonify(mensaje='Lo sentimos, no se puede acceder al recurso', tipo="bad")
 
 @app.route('/recuperacion', methods=['GET','POST'])
@@ -68,7 +73,7 @@ def registro():
                 return render_template('registro.html')
 
             if not utils.isPasswordValid(password):
-                error = 'La contraseña debe contenir al menos una minúscula, una mayúscula, un número y 8 caracteres'
+                error = u'La contraseña debe contenir al menos una minúscula, una mayúscula, un número y 8 caracteres'
                 flash(error)
                 return render_template('registro.html')
 
@@ -113,7 +118,7 @@ def login():
             if username == "test" and password == "test1234":
                 return redirect('/?sesion=1')
             else:
-                error = u"El correo electrónico o la contraseña no son validos"
+                error = u"El usuario o la contraseña no son validos"
                 return render_template("IniciarSesion.html", error1 = error)
 
         return render_template("IniciarSesion.html")
@@ -124,7 +129,13 @@ def login():
 @app.route('/imagen_crear', methods=["POST", "GET"])
 def crearimagen():
     if request.method == "GET":
-        return render_template("crear3.html")
+        msg = request.args.get('msg')        
+        if msg == "datos":
+            return render_template("crear3.html", msg='Los datos enviados son incorrectos. Intentelo nuevamente!')
+        elif msg == "guardados":
+            return render_template("crear3.html", msg='La imagen ha sido guardada exitosamente!')
+        else:
+            return render_template("crear3.html")
     else:
         return render_template("crear3.html")
 
