@@ -25,15 +25,19 @@ def descargar():
 @app.route('/imagen_guardar', methods=["POST"])
 def imagen_guardar():
     if request.method == 'POST':
-        nombre = request.form['nombre']
-        desc = request.form['descripcion']
+        nombre = request.form['titulo']
+        desc = request.form['form_description']
         acceso = request.form['acceso']
-        #algoritmo para almacenar la imagen en carpeta destino
-        #algoritmo para almacenar los datos de la imagen en DB
-        #return jsonify(mensaje='Imagen guardada con exito', tipo="ok")
-        redirect("/imagen_crear")
+        imagen_file = request.form['imagen']
+        if nombre != "" and desc != "" and acceso != "" and imagen_file != "":
+            #algoritmo para almacenar la imagen en carpeta destino
+            #algoritmo para almacenar los datos de la imagen en DB
+            #return jsonify(mensaje='Imagen guardada con exito', tipo="ok")
+            pass
+        else:
+            return redirect("/imagen_crear?error=datos")
     else:
-        redirect("/imagen_crear")
+        return redirect("/imagen_crear")
         #return jsonify(mensaje='Lo sentimos, no se puede acceder al recurso', tipo="bad")
 
 @app.route('/recuperacion', methods=['GET','POST'])
@@ -121,7 +125,11 @@ def login():
 @app.route('/imagen_crear', methods=["POST", "GET"])
 def crearimagen():
     if request.method == "GET":
-        return render_template("crear3.html")
+        error = request.args.get('error')
+        if error != "":
+            return render_template("crear3.html", error=error)
+        else:
+            return render_template("crear3.html")
     else:
         return render_template("crear3.html")
 
