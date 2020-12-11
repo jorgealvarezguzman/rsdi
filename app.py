@@ -63,10 +63,11 @@ def recuperacion(codigoRecuperacion=None):
                 return render_template('recuperar1.html')
     except:
         return render_template('recuperar1.html')
-
 @app.route('/imagen_borrar')
-def borrar(idimagen):
+@app.route('/imagen_borrar/<string:idImagen>')
+def borrar(idImagen):
     #funcion para borrar la imagen de la base de datos
+    flash('La imagen ha sido borrada exitosamente')
     return redirect('/')
     
 @app.route('/registro/', methods = ["GET", "POST"])
