@@ -42,7 +42,8 @@ def imagen_guardar():
         #return jsonify(mensaje='Lo sentimos, no se puede acceder al recurso', tipo="bad")
 
 @app.route('/recuperacion', methods=['GET','POST'])
-def recuperacion():
+@app.route('/recuperacion/<string:codigoRecuperacion>')
+def recuperacion(codigoRecuperacion=None):
     try:
         if (request.method== 'POST'):
             error=None
@@ -52,12 +53,16 @@ def recuperacion():
                 flash(error)
                 return render_template('recuperar1.html')
             yag = yagmail.SMTP('misiontic2022grupo11@gmail.com','2022Grupo11')
-            yag.send(to=email,subject='Recuperacion de contraseña',contents='Entra al siguiente link para reestablecer tu cuenta')
-            return render_template('recuperar2.html')
+            yag.send(to=email,subject='Recuperacion de contraseña',contents='Entra al siguiente link para reestablecer tu cuenta: http://127.0.0.1:5000/recuperacion/1234')
+            return redirect(url_for('login'))
         else:
-            return render_template('recuperar1.html')
+            if (codigoRecuperacion == '1234'):
+                return render_template('recuperar2.html')
+            else:
+                return render_template('recuperar1.html')
     except:
         return render_template('recuperar1.html')
+
 @app.route('/imagen_borrar')
 def borrar(idimagen):
     #funcion para borrar la imagen de la base de datos
