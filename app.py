@@ -126,9 +126,11 @@ def login():
 @app.route('/imagen_crear', methods=["POST", "GET"])
 def crearimagen():
     if request.method == "GET":
-        error = request.args.get('error')
-        if error != "":
-            return render_template("crear3.html", error=error)
+        msg = request.args.get('msg')        
+        if msg == "datos":
+            return render_template("crear3.html", msg='Los datos enviados son incorrectos. Intentelo nuevamente!')
+        elif msg == "guardados":
+            return render_template("crear3.html", msg='La imagen ha sido guardada exitosamente!')
         else:
             return render_template("crear3.html")
     else:
