@@ -78,6 +78,12 @@
 
         <button class="btn btn-big green" id="POST-name" name="name" data-action="upload">Subir</button>
     </form>
+    {% if error %}
+        {{ error }}
+    {% endif %}
+    {% if msg %}
+        {{ msg }}
+    {% endif %}
 
 </body>
 
