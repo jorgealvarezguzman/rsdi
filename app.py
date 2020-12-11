@@ -9,6 +9,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(12)
 sesion = True
 
+
 @app.route('/')
 def index():
     sesion = request.args.get('sesion')
@@ -17,11 +18,13 @@ def index():
     else:
         return render_template("Principal/inicio.html")
 
+
 @app.route('/imagen_descargar')
 @app.route('/imagen_descargar/<string:idImagen>')
 def descargar(idImagen=None):
     imagen = request.args.get('imagen')
     return render_template("Dashboard/descargar.html", imagen=imagen)
+
 
 @app.route('/imagen_guardar', methods=["POST"])
 def imagen_guardar():
@@ -41,6 +44,7 @@ def imagen_guardar():
     else:
         return redirect("/imagen_crear")
         #return jsonify(mensaje='Lo sentimos, no se puede acceder al recurso', tipo="bad")
+
 
 @app.route('/recuperacion', methods=['GET','POST'])
 @app.route('/recuperacion/<string:codigoRecuperacion>')
@@ -64,11 +68,15 @@ def recuperacion(codigoRecuperacion=None):
     except:
         return render_template('recuperar1.html')
 
+
 @app.route('/imagen_borrar')
-def borrar(idimagen):
+@app.route('/imagen_borrar/<string:idImagen>')
+def borrar(idImagen):
     #funcion para borrar la imagen de la base de datos
+    flash('La imagen ha sido borrada exitosamente')
     return redirect('/')
     
+
 @app.route('/registro/', methods = ["GET", "POST"])
 def registro():
     try:
@@ -107,13 +115,15 @@ def registro():
 @app.route('/logout')
 def logout():
     return redirect("/")
-    
+
+
 @app.route('/imagen_actualizar/')
 @app.route('/imagen_actualizar/<int:idImagen>')
 def actualizarImagen(idImagen=None):
     if idImagen:
         return render_template('actualizarImagen.html', nombre="test", describcion="test", es_publica=True) 
     return render_template('actualizarImagen.html')
+
 
 @app.route("/login/", methods=('GET', 'POST'))
 def login():
@@ -136,6 +146,7 @@ def login():
     except:
         return render_template("IniciarSesion.html")
 
+
 @app.route('/imagen_crear')
 def crearimagen():
     if request.method == "GET":
@@ -149,11 +160,13 @@ def crearimagen():
     else:
         return render_template("crear3.html")
 
+
 @app.route('/activacion/<string:codigoActivacion>')
 def activacion(codigoActivacion):
     if codigoActivacion == 'enhorabuena':
         return render_template("activacion.html")
     return render_template("IniciarSesion.html")
+
 
 @app.route('/imagen_ver/<string:idImagen>')
 def obtenerImagen(idImagen=None):
