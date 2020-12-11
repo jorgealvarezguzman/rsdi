@@ -154,3 +154,8 @@ def activacion(codigoActivacion):
     if codigoActivacion == 'enhorabuena':
         return render_template("activacion.html")
     return render_template("IniciarSesion.html")
+
+@app.route('/imagen_ver/<string:idImagen>')
+def obtenerImagen(idImagen=None):
+    #funcion para obtener la imagen de la base de datos
+    return redirect('/')
