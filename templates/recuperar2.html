@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Recuperar Contraseña</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/recuperar.css') }}">
-    <script src="{{ url_for('static', filename='js/validacion.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/validacionrecuperarContraseña.js') }}"></script>
 </head>
 <body>
     <form id="forma1" method="POST" onsubmit="return validarDatos();" action="{{ url_for('login')}}">
