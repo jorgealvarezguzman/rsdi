@@ -95,7 +95,7 @@ def registro():
 
 @app.route('/logout')
 def logout():
-    sesion = False
+    return redirect("/")
     
 @app.route('/imagen_actualizar/')
 @app.route('/imagen_actualizar/<int:idImagen>')
