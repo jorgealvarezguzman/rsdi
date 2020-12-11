@@ -68,7 +68,7 @@ def registro():
                 return render_template('registro.html')
 
             if not utils.isPasswordValid(password):
-                error = 'La contraseña debe contenir al menos una minúscula, una mayúscula, un número y 8 caracteres'
+                error = u'La contraseña debe contenir al menos una minúscula, una mayúscula, un número y 8 caracteres'
                 flash(error)
                 return render_template('registro.html')
 
@@ -110,7 +110,7 @@ def login():
             if username == "test" and password == "test1234":
                 return redirect('/?sesion=1')
             else:
-                error = u"El correo electrónico o la contraseña no son validos"
+                error = u"El usuario o la contraseña no son validos"
                 return render_template("IniciarSesion.html", error1 = error)
 
         return render_template("IniciarSesion.html")
