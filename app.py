@@ -43,18 +43,23 @@ def imagen_guardar():
 
 @app.route('/recuperacion', methods=['GET','POST'])
 def recuperacion():
-    if (request.method== 'POST'):
-        email = request.form['email']
-        if not utils.isEmailValid(email):
-            return render_template('recuperarContraseña1/index.html')
-        yag = yagmail.SMTP('misiontic2022grupo11@gmail.com','2022Grupo11')
-        yag.send(to=email,subject='Recuperacion de contraseña',contents='Entra al siguiente link para reestablecer tu cuenta')
-        return render_template('recuperar2.html')
-    else:
+    try:
+        if (request.method== 'POST'):
+            error=None
+            email = request.form['email']
+            if not utils.isEmailValid(email):
+                error = 'Direccion de correo no valida'
+                flash(error)
+                return render_template('recuperar1.html')
+            yag = yagmail.SMTP('misiontic2022grupo11@gmail.com','2022Grupo11')
+            yag.send(to=email,subject='Recuperacion de contraseña',contents='Entra al siguiente link para reestablecer tu cuenta')
+            return render_template('recuperar2.html')
+        else:
+            return render_template('recuperar1.html')
+    except:
         return render_template('recuperar1.html')
-
 @app.route('/imagen_borrar')
-def borrar():
+def borrar(idimagen):
     #funcion para borrar la imagen de la base de datos
     return redirect('/')
     
