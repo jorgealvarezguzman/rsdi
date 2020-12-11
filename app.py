@@ -93,7 +93,10 @@ def logout():
     sesion = False
     
 @app.route('/imagen_actualizar/')
-def actualizarImagen():
+@app.route('/imagen_actualizar/<int:idImagen>')
+def actualizarImagen(idImagen=None):
+    if idImagen:
+        return render_template('actualizarImagen.html', nombre="test", describcion="test", es_publica=True) 
     return render_template('actualizarImagen.html')
 
 @app.route("/login/", methods=('GET', 'POST'))

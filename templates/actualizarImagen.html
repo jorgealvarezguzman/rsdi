@@ -17,8 +17,20 @@
 			<label for="publica" class='sk-asset sk-Pblica-A5E0E215-9E79-4648-982A-002853E5D0E1'>Pública</label>
 
 			<input type="radio" name="acceso" id="privada" class='sk-asset sk-Rectangle-18-1C078878-C489-4D24-9DDE-6200A2CB5172'/>
-			<label for="publica" class='sk-asset sk-Privada-F48F095D-0D3C-42D0-A18B-FB185F87FB19'>Privada</label>
+			<label for="privada" class='sk-asset sk-Privada-F48F095D-0D3C-42D0-A18B-FB185F87FB19'>Privada</label>
+			
+			<script>
+				var True = true;
+				var False = false;
 
+				if ({{ es_publica | safe }})
+				{
+					document.getElementById("publica").checked = {{ es_publica | safe }};
+				}
+				else {
+					document.getElementById("privada").checked = !{{ es_publica | safe }};
+				}
+			</script>
 
 			<div class='sk-asset sk-upload-field-4B782129-F489-47C7-A62A-6FCB3F5C56F6'>
 				<div class='sk-asset sk-Rectangle-B7B8647B-A0B6-424E-B489-D0FB95D9F6AE'></div>
@@ -34,12 +46,12 @@
 
 			<div class='sk-asset sk-INPUT-Descripcion-CF64A039-EB37-4E7F-B4EC-08701AE44149'>
 
-				<textarea type="text" name="descripcion" id="descripcion" placeholder="Descripción" class='sk-asset sk-Rectangle-2-Copy-5F9BDE28-2387-46E3-9166-7F05EDC998B2'></textarea>
+				<textarea type="text" name="descripcion" id="descripcion" placeholder="Descripción" class='sk-asset sk-Rectangle-2-Copy-5F9BDE28-2387-46E3-9166-7F05EDC998B2'>{{ describcion }}</textarea>
 
 			</div>
 			<div class='sk-asset sk-INPUT-Name-CFEF16AD-5C1C-47DF-8ACE-49545E8AF297'>
 				
-				<input type="text" name="nombre" id="nombre" placeholder="Nombre" class='sk-asset sk-Rectangle-2-39D6629A-EC63-4A10-A674-A9229073B27A'/>
+				<input type="text" name="nombre" id="nombre" placeholder="Nombre" value="{{ nombre }}" class='sk-asset sk-Rectangle-2-39D6629A-EC63-4A10-A674-A9229073B27A'/>
 				
 			</div>
 			<div class='sk-asset sk-Head-8EA2DEF6-63D5-4144-BEAB-C6BE24A70221'>
