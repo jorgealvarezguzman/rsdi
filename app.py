@@ -26,16 +26,17 @@ def descargar():
 def imagen_guardar():
     if request.method == 'POST':
         nombre = request.form['titulo']
-        desc = request.form['form_description']
-        acceso = request.form['acceso']
-        imagen_file = request.form['imagen']
-        if nombre != "" and desc != "" and acceso != "" and imagen_file != "":
+        desc = request.form['form-description']
+        acceso = request.form['form-privacy']
+        #imagen_file = request.form['imagen']
+        if nombre != "" and desc != "" and acceso != "":
+            print(request.form)
             #algoritmo para almacenar la imagen en carpeta destino
             #algoritmo para almacenar los datos de la imagen en DB
             #return jsonify(mensaje='Imagen guardada con exito', tipo="ok")
-            pass
+            return redirect("/imagen_crear?msg=guardados")
         else:
-            return redirect("/imagen_crear?error=datos")
+            return redirect("/imagen_crear?msg=datos")
     else:
         return redirect("/imagen_crear")
         #return jsonify(mensaje='Lo sentimos, no se puede acceder al recurso', tipo="bad")
