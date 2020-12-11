@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Confirmación Cuenta</title>
-    <link rel="stylesheet" href="assets/css/style.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style2.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}">
 </head>
 <body>
     <div id="forma1">
@@ -13,7 +13,7 @@
         <br><br>
         <h1>Su cuenta ha sido activada con éxito.</h1>
         <br>
-        <a class="btn btn-primary" href="../IniciarSesion/index.html">Iniciar Sesión</a>        
+        <a class="btn btn-primary" href="{{ url_for('login') }}">Iniciar Sesión</a>        
     </div>
 </body>
 </html>
