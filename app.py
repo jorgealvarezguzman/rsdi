@@ -49,9 +49,9 @@ def recuperacion():
             return render_template('recuperarContraseña1/index.html')
         yag = yagmail.SMTP('misiontic2022grupo11@gmail.com','2022Grupo11')
         yag.send(to=email,subject='Recuperacion de contraseña',contents='Entra al siguiente link para reestablecer tu cuenta')
-        return render_template('recuperarContraseña2/index.html')
+        return render_template('recuperar2.html')
     else:
-        return render_template('recuperarContraseña1/index.html')
+        return render_template('recuperar1.html')
 
 @app.route('/imagen_borrar')
 def borrar():
