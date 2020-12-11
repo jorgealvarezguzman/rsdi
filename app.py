@@ -18,7 +18,8 @@ def index():
         return render_template("Principal/inicio.html")
 
 @app.route('/imagen_descargar')
-def descargar():
+@app.route('/imagen_descargar/<string:idImagen>')
+def descargar(idImagen=None):
     imagen = request.args.get('imagen')
     return render_template("Dashboard/descargar.html", imagen=imagen)
 
