@@ -1,10 +1,9 @@
-# encoding: utf-8
 from flask import Flask, render_template, request, redirect, url_for, flash
 import yagmail
 import utils
 import os
 from modelo import *
-#from flask import jsonify
+
 
 app = Flask(__name__)
 app.config['DATABASE'] = 'rsdi.db'
