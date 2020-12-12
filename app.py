@@ -3,9 +3,11 @@ from flask import Flask, render_template, request, redirect, url_for, flash
 import yagmail
 import utils
 import os
+from modelo import *
 #from flask import jsonify
 
 app = Flask(__name__)
+app.config['DATABASE'] = 'rsdi.db'
 app.secret_key = os.urandom(12)
 sesion = True
 
@@ -13,6 +15,7 @@ sesion = True
 @app.route('/')
 def index():
     sesion = request.args.get('sesion')
+
     if sesion == "1":
         return render_template("Dashboard/inicio.html")
     else:
