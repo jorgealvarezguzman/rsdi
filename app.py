@@ -1,12 +1,13 @@
+# encoding: utf-8
+# -*- coding: ascii -*-
 from flask import Flask, render_template, request, redirect, url_for, flash
 import yagmail
 import utils
 import os
 from modelo import *
-
+#from flask import jsonify
 
 app = Flask(__name__)
-app.config['DATABASE'] = 'rsdi.db'
 app.secret_key = os.urandom(12)
 sesion = True
 
@@ -14,7 +15,6 @@ sesion = True
 @app.route('/')
 def index():
     sesion = request.args.get('sesion')
-
     if sesion == "1":
         return render_template("Dashboard/inicio.html")
     else:
@@ -138,7 +138,9 @@ def login():
             if request.form.get('recordarme'):
                 recordarme = True
 
-            if username == "test" and password == "test1234":
+            usuario = loginUsuario(username, password)
+            
+            if not usuario == []:
                 return redirect('/?sesion=1')
             else:
                 error = u"El usuario o la contraseña no son validos"
