@@ -74,21 +74,41 @@ def imagen_guardar():
 @app.route('/recuperacion/<string:codigoRecuperacion>')
 def recuperacion(codigoRecuperacion=None):
     try:
-        if (request.method== 'POST'):
-            error=None
-            email = request.form['email']
-            if not utils.isEmailValid(email):
-                error = 'Direccion de correo no valida'
+        if(not codigoRecuperacion):
+            if (request.method== 'POST'):
+                error=None
+                email = request.form['email']
+                usuario =getUsuarioByEmail(email)
+                if not utils.isEmailValid(email):
+                    error = 'Direccion de correo no valida'
+                    flash(error)
+                    return render_template('recuperar1.html')
+                if usuario==[]:
+                    error= 'Email no valido'
+                    flash(error)
+                    return render_template('recuperar1.html')
+                yag = yagmail.SMTP('misiontic2022grupo11@gmail.com','2022Grupo11')
+                yag.send(to=email,subject='Recuperacion de contraseña',contents='Entra al siguiente link para reestablecer tu cuenta: http://127.0.0.1:5000/recuperacion/'+usuario[0][0])
+                return redirect(url_for('login'))
+            else:
+                error = 'revise su correo'
                 flash(error)
                 return render_template('recuperar1.html')
-            yag = yagmail.SMTP('misiontic2022grupo11@gmail.com','2022Grupo11')
-            yag.send(to=email,subject='Recuperacion de contraseña',contents='Entra al siguiente link para reestablecer tu cuenta: http://127.0.0.1:5000/recuperacion/1234')
-            return redirect(url_for('login'))
         else:
-            if (codigoRecuperacion == '1234'):
-                return render_template('recuperar2.html')
+            if(getUsuario(codigoRecuperacion) !=[]):
+                if (request.method== 'POST'):
+                    pass1=request.form['contrasena']
+                    pass2=request.form['confirmarContrasena']
+                    if(pass1!="" and pass2!="" and pass1==pass2):
+                        actualizarUsuario(codigoRecuperacion, generate_password_hash(pass1))
+                        return redirect('/login')
+                    error= 'campos vacios o no coinciden'
+                    flash(error)
+                    return redirect('/recuperacion/'+codigoRecuperacion)
+                else:
+                    return render_template('recuperar2.html')
             else:
-                return render_template('recuperar1.html')
+                return redirect('/')
     except:
         return render_template('recuperar1.html')
 
