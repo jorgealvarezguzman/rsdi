@@ -11,6 +11,7 @@ from modelo import *
 app = Flask(__name__)
 app.config['DATABASE'] = 'rsdi.db'
 app.secret_key = os.urandom(12)
+app.config['UPLOAD_FOLDER'] = "./uploads"
 sesion = True
 
 
@@ -36,13 +37,32 @@ def imagen_guardar():
         nombre = request.form['titulo']
         desc = request.form['form-description']
         acceso = request.form['form-privacy']
-        #imagen_file = request.form['imagen']
-        if nombre != "" and desc != "" and acceso != "":
-            print(request.form)
+        imagen_file = request.files['imagen']
+        if nombre != "" and desc != "" and acceso != "" and imagen_file != "":
+            # Definimos la ruta base
+            #BASE_DIR = dirname(dirname(abspath(__file__)))
+            BASE_DIR_PUB = "publics"
+            BASE_DIR_PRV = "privates"
+
             #algoritmo para almacenar la imagen en carpeta destino
-            #algoritmo para almacenar los datos de la imagen en DB
+            if imagen_file.filename:
+                if acceso == "public":
+                    destino = BASE_DIR_PUB+"/"+str(imagen_file.filename)
+                    publica = 1
+                elif acceso == "private":
+                    destino = BASE_DIR_PRV + "/" + str(imagen_file.filename)
+                    publica = 0
+
+                #Move file to UPLAOD_FOLDER
+                imagen_file.save(os.path.join(app.config['UPLOAD_FOLDER'], destino))
+
+                #algoritmo para almacenar los datos de la imagen en DB
+                img_data_to_db = crearImagen(nombre, desc, publica, destino, 1)
+                if img_data_to_db == "Imagen creada exitosamente":
+                    return redirect("/imagen_crear?msg=guardados")
+
+
             #return jsonify(mensaje='Imagen guardada con exito', tipo="ok")
-            return redirect("/imagen_crear?msg=guardados")
         else:
             return redirect("/imagen_crear?msg=datos")
     else:
