@@ -4,7 +4,6 @@ import utils
 import os
 from modelo import *
 
-
 app = Flask(__name__)
 app.config['DATABASE'] = 'rsdi.db'
 app.secret_key = os.urandom(12)
