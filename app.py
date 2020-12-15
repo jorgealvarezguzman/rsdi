@@ -8,6 +8,7 @@ from modelo import *
 #from flask import jsonify
 
 app = Flask(__name__)
+app.config['DATABASE'] = 'rsdi.db'
 app.secret_key = os.urandom(12)
 sesion = True
 
