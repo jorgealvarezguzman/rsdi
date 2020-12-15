@@ -89,6 +89,13 @@ def registro():
             email = request.form['correo']
             error = None
             
+            if getUsuarioByEmail(email) != []:
+                error="Usuario ya existente"
+                flash(error)
+                return redirect(url_for('registro'))
+            else:
+                print(crearUsuario(username, password, email))
+            
             if not utils.isUsernameValid(username):
                 error = "El usuario debe ser alfanumerico o incluir solo '.','_','-'"
                 flash(error)

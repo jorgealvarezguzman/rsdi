@@ -43,6 +43,8 @@ def crearUsuario(username, password, email):
             error = 'el usuario ya existe, intente nuevamente con un usuario diferente'
         elif(str(e)=="UNIQUE constraint failed: usuario.email"):
             error = u'esta dirección de correo ya está registrada'
+        else:
+            error = e
         return error
 
 
