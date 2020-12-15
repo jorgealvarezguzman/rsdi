@@ -181,7 +181,7 @@ def activacion(codigoActivacion):
 
 @app.route('/imagen_ver/<string:idImagen>')
 def obtenerImagen(idImagen=None):
-    #funcion para obtener la imagen de la base de datos
+
     return redirect('/')
 
 
