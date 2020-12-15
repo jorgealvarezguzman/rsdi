@@ -9,21 +9,21 @@ def loginUsuario(username, password):
     return usuario
 
 def getUsuario(id):
-    arreglo = (id)
+    arreglo = (id,)
     query = "select * from usuario where id = ?"
     usuario = sql_read(query, arreglo)
     return usuario
 
 
 def getUsuarioByEmail(email):
-    arreglo = (email)
+    arreglo = (email,)
     query = "select * from usuario where email = ?"
     usuario = sql_read(query, arreglo)
     return usuario
 
 
 def getImagen(id):
-    arreglo = (id)
+    arreglo = (id,)
     query = """select * from Imagen 
                 where id = ?"""
     imagen = sql_read(query, arreglo)
@@ -88,6 +88,6 @@ def actualizarImg(nombre, descripcion, publica, url, id):
 
 
 def borrarImagen(id):
-    arreglo = (id)
+    arreglo = (id,)
     query = "delete from Usuario where id = ?"
     sql_delete(query, arreglo)
