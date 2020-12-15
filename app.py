@@ -9,6 +9,7 @@ from modelo import *
 #from flask import jsonify
 
 app = Flask(__name__)
+app.secret_key = os.urandom( 24 )
 app.config['DATABASE'] = 'rsdi.db'
 app.secret_key = os.urandom(12)
 app.config['UPLOAD_FOLDER'] = "./uploads"
@@ -192,6 +193,11 @@ def login():
             usuario = loginUsuario(username)
             if usuario != []:
                 if check_password_hash(usuario[0][2], password):
+                    if not usuario[0][4]:
+                        error2 = "Esta cuenta no ha sido activada."
+                        error3= "Revisa tu correo para activar tu cuenta."
+                        return render_template("IniciarSesion.html", usuario = username, password=password, 
+                                                error2 = error2, error3 = error3)
                     session.clear()
                     session['id_usuario'] = usuario[0][0]
                     return redirect('/?sesion=1')
