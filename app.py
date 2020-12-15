@@ -131,13 +131,6 @@ def registro():
             email = request.form['correo']
             error = None
             
-            if getUsuarioByEmail(email) != []:
-                error="Usuario ya existente"
-                flash(error)
-                return redirect(url_for('registro'))
-            else:
-                crearUsuario(username, generate_password_hash(password), email)
-            
             if not utils.isUsernameValid(username):
                 error = "El usuario debe ser alfanumerico o incluir solo '.','_','-'"
                 flash(error)
@@ -152,6 +145,13 @@ def registro():
                 error = 'Correo invalido'
                 flash(error)
                 return render_template("registro.html")
+
+            if getUsuarioByEmail(email) != []:
+                error="Usuario ya existente"
+                flash(error)
+                return redirect(url_for('registro'))
+            else:
+                crearUsuario(username, generate_password_hash(password), email)
 
             yag = yagmail.SMTP('misiontic2022grupo11@gmail.com', '2022Grupo11')
             yag.send(to=email, subject='Activa tu cuenta',
