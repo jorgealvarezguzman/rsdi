@@ -24,31 +24,31 @@ def close_db(e=None):
         db.close()
 
 
-def sql_create(query):
+def sql_create(query,arreglo):
     db = get_db()
-    db.execute(query)
+    db.execute(query,arreglo)
     db.commit()
     db.close()
 
 
-def sql_read(query):
+def sql_read(query,arreglo):
     db = get_db()
     cursor = db.cursor()
-    cursor.execute(query)
+    cursor.execute(query,arreglo)
     objects = cursor.fetchall()
     db.close()
     return objects
 
 
-def sql_update(query):
+def sql_update(query,arreglo):
     db = get_db()
-    db.execute(query)
+    db.execute(query,arreglo)
     db.commit()
     db.close()
 
 
-def sql_delete(query):
+def sql_delete(query,arreglo):
     db = get_db()
-    db.execute(query)
+    db.execute(query,arreglo)
     db.commit()
     db.close()
