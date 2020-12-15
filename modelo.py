@@ -1,6 +1,11 @@
 from db import *
 
 
+def loginUsuario(username, password):
+    query = f"SELECT * FROM usuario WHERE username='{username}' AND password='{password}';"
+    usuario = sql_read(query)
+    return usuario
+
 def getUsuario(id):
     query = f"""select * from Usuario 
                 where id = {id};"""
