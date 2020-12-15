@@ -95,7 +95,7 @@ def registro():
                 flash(error)
                 return redirect(url_for('registro'))
             else:
-                print(crearUsuario(username, password, email))
+                crearUsuario(username, password, email)
             
             if not utils.isUsernameValid(username):
                 error = "El usuario debe ser alfanumerico o incluir solo '.','_','-'"
