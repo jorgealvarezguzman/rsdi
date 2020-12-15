@@ -4,13 +4,13 @@ from datetime import datetime
 
 def loginUsuario(username, password):
     arreglo = (username, password)
-    query = f"SELECT * FROM usuario WHERE username=? AND password=?"
+    query = "SELECT * FROM usuario WHERE username=? AND password=?"
     usuario = sql_read(query, arreglo)
     return usuario
 
 def getUsuario(id):
     arreglo = (id)
-    query = f"""select * from Usuario 
+    query = """select * from Usuario 
                 where id = ?"""
     usuario = sql_read(query, arreglo)
     return usuario
@@ -18,7 +18,7 @@ def getUsuario(id):
 
 def getUsuarioByEmail(email):
     arreglo = (email)
-    query = f"""select * from Usuario 
+    query = """select * from Usuario 
                 where email = ?"""
     usuario = sql_read(query, arreglo)
     return usuario
@@ -26,7 +26,7 @@ def getUsuarioByEmail(email):
 
 def getImagen(id):
     arreglo = (id)
-    query = f"""select * from Imagen 
+    query = """select * from Imagen 
                 where id = ?"""
     imagen = sql_read(query, arreglo)
     return imagen
@@ -35,7 +35,7 @@ def getImagen(id):
 def crearUsuario(username, password, email):
     try:
         arreglo = (username, password, email)
-        query = f"""insert into Usuario (username, password, email) 
+        query = """insert into Usuario (username, password, email) 
                     values(?, ?, ?)"""
         sql_create(query, arreglo)
         return "Usuario creado exitosamente"
@@ -50,16 +50,13 @@ def crearUsuario(username, password, email):
 
 def crearImagen(nombre, descripcion, publica, url, id_usuario):
     try:
-        date = 'date'
+        date = datetime.now()
         arreglo = (nombre, descripcion, publica, url, id_usuario, date)
-        query = f"""insert into Imagen (nombre, descripcion, publica, url, id_usuario, fecha) 
+        query = """insert into Imagen (nombre, descripcion, publica, url, id_usuario, fecha) 
                     values(?, ?, ?, ?, ?, ?)"""
         sql_create(query, arreglo)
         return "Imagen creada exitosamente"
     except(Exception) as e:
-
-        print(str(e))
-
         error=None
         if(str(e)=="UNIQUE constraint failed: Imagen.url"):
             error = 'la ruta url ya existe'
@@ -71,7 +68,7 @@ def crearImagen(nombre, descripcion, publica, url, id_usuario):
 def actualizarUsuario(id, password):
     try:
         arreglo = (id, password)
-        query = f"""update Usuario set password = ?
+        query = """update Usuario set password = ?
                     where id = ?"""
         sql_update(query, arreglo)
         return "Contraseña actualizada correctamente"
@@ -79,17 +76,19 @@ def actualizarUsuario(id, password):
         return "Error al actualizar la contraseña"
 
 
-def actualizarImagen(id, nombre, descripcion, publica, url):
+def actualizarImg(nombre, descripcion, publica, url, id):
     try:
-        query = f"""update Imagen set nombre = {nombre}, descripcion = {descripcion}, 
-                    publica = {publica}, url = '{url}', fecha = datetime('now', 'localtime')
-                    where id = {id};"""
-        sql_update(query)
+        date = datetime.now()
+        arreglo = (nombre, descripcion, publica, url, date, id)
+        query = """update Imagen set nombre = ?, descripcion = ?, 
+                    publica = ?, url = ?, fecha = ?
+                    where id = ?"""
+        sql_update(query, arreglo)
         return "Imagen actualizada correctamente"
     except:
         return "Error al actualizar la imagen"
 
 
 def borrarImagen(id):
-    query = f"delete from Usuario where id = {id};"
-    sql_delete(query)
+    query = "delete from Usuario where id = ?"
+    sql_delete(query, arreglo)
