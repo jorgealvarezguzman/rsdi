@@ -30,6 +30,14 @@ def getImagen(id):
     return imagen
 
 
+def getImagenes(acceso, limite, offset):
+    arreglo = (acceso, limite, offset)
+    query = """select * from Imagen 
+                where publica = ? limit ? offset ?"""
+    imagen = sql_read(query, arreglo)
+    return imagen
+
+
 def crearUsuario(username, password, email):
     try:
         arreglo = (username, password, email)

@@ -8,12 +8,18 @@
     <body style="margin:0px;">
         <form id="forma1" method="POST" onsubmit="return validarDatos();" action="{{ url_for('recuperacion')}}">
             <h2>Recuperar Contraseña</h2>
-            <br><br><br>
+            <br><br>
             <div id="mensajeCorreo">
-                <p>Ingresa tu Correo</p>    
+                <p>Ingresa tu Correo</p>
             </div>
+            <div id="mensajeDatosIncorrectos">
+                <p>
+                    {{ error1 }}
+                </p>
+            </div>
+            <br><br><br>
             <input type="text" name="email" id="email" placeholder="E-mail" oninput="limpiarAlertasEmail();">
-            <br><br><br><br><br>
+            <br><br><br>
             <br><br><br>
             <input type="submit" name="Enviar" value="Enviar" id="botonEnviar" style="cursor: pointer;">
             <br><br><br>
