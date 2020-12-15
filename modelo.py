@@ -3,27 +3,27 @@ from datetime import datetime
 
 
 def loginUsuario(username, password):
-    arreglo = [username, password]
+    arreglo = (username, password)
     query = "SELECT * FROM usuario WHERE username=? AND password=?"
     usuario = sql_read(query, arreglo)
     return usuario
 
 def getUsuario(id):
-    arreglo = [id]
+    arreglo = (id)
     query = "select * from usuario where id = ?"
     usuario = sql_read(query, arreglo)
     return usuario
 
 
 def getUsuarioByEmail(email):
-    arreglo = [email]
+    arreglo = (email)
     query = "select * from usuario where email = ?"
     usuario = sql_read(query, arreglo)
     return usuario
 
 
 def getImagen(id):
-    arreglo = [id]
+    arreglo = (id)
     query = """select * from Imagen 
                 where id = ?"""
     imagen = sql_read(query, arreglo)
@@ -32,7 +32,7 @@ def getImagen(id):
 
 def crearUsuario(username, password, email):
     try:
-        arreglo = [username, password, email]
+        arreglo = (username, password, email)
         query = """insert into Usuario (username, password, email) 
                     values(?, ?, ?)"""
         sql_create(query, arreglo)
@@ -49,7 +49,7 @@ def crearUsuario(username, password, email):
 def crearImagen(nombre, descripcion, publica, url, id_usuario):
     try:
         date = datetime.now()
-        arreglo = [nombre, descripcion, publica, url, id_usuario, date]
+        arreglo = (nombre, descripcion, publica, url, id_usuario, date)
         query = """insert into Imagen (nombre, descripcion, publica, url, id_usuario, fecha) 
                     values(?, ?, ?, ?, ?, ?)"""
         sql_create(query, arreglo)
@@ -65,7 +65,7 @@ def crearImagen(nombre, descripcion, publica, url, id_usuario):
 
 def actualizarUsuario(id, password):
     try:
-        arreglo = [id, password]
+        arreglo = (id, password)
         query = """update Usuario set password = ?
                     where id = ?"""
         sql_update(query, arreglo)
@@ -77,7 +77,7 @@ def actualizarUsuario(id, password):
 def actualizarImg(nombre, descripcion, publica, url, id):
     try:
         date = datetime.now()
-        arreglo = [nombre, descripcion, publica, url, date, id]
+        arreglo = (nombre, descripcion, publica, url, date, id)
         query = """update Imagen set nombre = ?, descripcion = ?, 
                     publica = ?, url = ?, fecha = ?
                     where id = ?"""
@@ -88,6 +88,6 @@ def actualizarImg(nombre, descripcion, publica, url, id):
 
 
 def borrarImagen(id):
-    arreglo = [id]
+    arreglo = (id)
     query = "delete from Usuario where id = ?"
     sql_delete(query, arreglo)
