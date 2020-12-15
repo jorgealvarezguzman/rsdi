@@ -96,7 +96,7 @@ def recuperacion(codigoRecuperacion=None):
 @app.route('/imagen_borrar')
 @app.route('/imagen_borrar/<string:idImagen>')
 def borrar(idImagen):
-    sql_delete("DELETE FROM IMAGEN WHERE id=?", [idImagen])
+    borrarImagen(idImagen)
     flash('La imagen ha sido borrada exitosamente')
     return redirect('/')
     
