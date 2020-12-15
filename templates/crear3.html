@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crear Imagen</title>
+    <link rel="stylesheet" href="/static/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{url_for('static', filename='css/csscrear.css')}}" />
 
 </head>
@@ -24,7 +25,7 @@
     </div>
     <form method="POST" action="/imagen_guardar" enctype='multipart/form-data'>
         <input id="anywhere-upload-input" data-action="anywhere-upload-input" class="hidden-visibility" type="file"
-            accept="image/*, .jpg,.png,.bmp,.gif,.tif,.webp,.heic,.pdf,.jpeg,.tiff,.heif" multiple="" name="imagen">
+            accept="image/*, .jpg,.png,.bmp,.webp,.jpeg" name="imagen">
 
         <ul id="anywhere-upload-queue" class="upload-box-queue content-width soft-hidden" data-group="upload-queue">
         </ul>
@@ -60,7 +61,7 @@
                 <select name="form-privacy" id="form-privacy" class="text-input" data-combo="form-privacy-combo"
                     rel="template-tooltip" data-tiptip="right" data-title="Quién puede ver este contenido" name="acceso">
                     <option value="public">Público</option>
-                    <option value="private_but_link">Privado (cualquiera con el enlace)</option>
+                    <option value="private">Privado</option>
                     <!-- <option value="password">Privado (protegido con contraseña)</option> -->
                 </select>
             </div>
@@ -76,10 +77,12 @@
             </div>
         </div> -->
 
-        <button class="btn btn-big green" id="POST-name" name="name" data-action="upload">Subir</button>
+        <button class="btn btn-success" id="POST-name" name="subir" value="subir" data-action="upload">Subir</button>
     </form>
     {% if msg %}
-        {{ msg }}
+        <div class="alert alert-warning">
+            {{ msg }}
+        </div>
     {% endif %}
 
 </body>
