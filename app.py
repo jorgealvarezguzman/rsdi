@@ -1,6 +1,7 @@
 # encoding: utf-8
 # -*- coding: ascii -*-
 from flask import Flask, render_template, request, redirect, url_for, flash, session, g
+from werkzeug.security import generate_password_hash, check_password_hash
 import yagmail
 import utils
 import os
@@ -147,11 +148,14 @@ def login():
             if request.form.get('recordarme'):
                 recordarme = True
 
-            usuario = loginUsuario(username, password)
-            if not usuario == []:
-                session.clear()
-                session['id_usuario'] = usuario[0][0]
-                return redirect('/?sesion=1')
+            usuario = loginUsuario(username)
+            if usuario != []:
+                if check_password_hash(usuario[0][2], password):
+                    session.clear()
+                    session['id_usuario'] = usuario[0][0]
+                    return redirect('/?sesion=1')
+                error = u"El usuario o la contraseña no son validos"
+                return render_template("IniciarSesion.html", error1 = error, usuario = username, password=password)
             else:
                 error = u"El usuario o la contraseña no son validos"
                 return render_template("IniciarSesion.html", error1 = error, usuario = username, password=password)

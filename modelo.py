@@ -2,9 +2,9 @@ from db import *
 from datetime import datetime
 
 
-def loginUsuario(username, password):
-    arreglo = (username, password)
-    query = "SELECT * FROM usuario WHERE username=? AND password=?"
+def loginUsuario(username):
+    arreglo = (username,)
+    query = "SELECT * FROM usuario WHERE username=?"
     usuario = sql_read(query, arreglo)
     return usuario
 
