@@ -154,7 +154,8 @@ def registro():
 
             yag = yagmail.SMTP('misiontic2022grupo11@gmail.com', '2022Grupo11')
             yag.send(to=email, subject='Activa tu cuenta',
-                     contents='Bienvenido, usa este link para activar tu cuenta: http://127.0.0.1:5000/activacion/enhorabuena ')
+                     contents=f"""Bienvenido, usa este link para activar tu cuenta: 
+                                  http://127.0.0.1:5000/activacion/{generate_password_hash('enhorabuena')}?email={email}""")
             flash('Revisa tu correo para activar tu cuenta')
             return redirect(url_for('login'))
         
@@ -221,7 +222,9 @@ def crearimagen():
 
 @app.route('/activacion/<string:codigoActivacion>')
 def activacion(codigoActivacion):
-    if codigoActivacion == 'enhorabuena':
+    if (check_password_hash(codigoActivacion, 'enhorabuena')):
+        usuario = getUsuarioByEmail(request.args.get('email'))
+        activarUsuario(usuario[0][0])
         return render_template("activacion.html")
     return render_template("IniciarSesion.html")
 
