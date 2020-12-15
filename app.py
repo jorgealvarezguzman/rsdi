@@ -1,6 +1,6 @@
 # encoding: utf-8
 # -*- coding: ascii -*-
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session, g
 import yagmail
 import utils
 import os
@@ -140,8 +140,9 @@ def login():
                 recordarme = True
 
             usuario = loginUsuario(username, password)
-            
             if not usuario == []:
+                session.clear()
+                session['id_usuario'] = usuario[0][0]
                 return redirect('/?sesion=1')
             else:
                 error = u"El usuario o la contraseña no son validos"
@@ -177,3 +178,14 @@ def activacion(codigoActivacion):
 def obtenerImagen(idImagen=None):
     #funcion para obtener la imagen de la base de datos
     return redirect('/')
+
+
+@app.before_request
+def load_logged_in_user():
+    id_usuario = session.get('id_usuario')
+    
+    if id_usuario is None:
+        g.usuario = None
+    else:
+        g.usuario = getUsuario(id_usuario)[0]  # se almacenan los datos de usuario. [id,username,password,email]
+    
