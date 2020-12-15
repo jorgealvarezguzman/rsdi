@@ -35,7 +35,6 @@ def sql_read(query,arreglo):
     cursor = db.cursor()
     cursor.execute(query,arreglo)
     objects = cursor.fetchall()
-    db.close()
     return objects
 
 
