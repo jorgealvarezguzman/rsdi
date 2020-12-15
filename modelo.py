@@ -73,9 +73,9 @@ def crearImagen(nombre, descripcion, publica, url, id_usuario):
         return error
 
 
-def actualizarUsuario(id, password):
+def actualizarUsuario(password, id):
     try:
-        arreglo = (id, password)
+        arreglo = (password, id)
         query = """update Usuario set password = ?
                     where id = ?"""
         sql_update(query, arreglo)

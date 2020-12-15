@@ -71,7 +71,7 @@ def imagen_guardar():
 
 
 @app.route('/recuperacion', methods=['GET','POST'])
-@app.route('/recuperacion/<string:codigoRecuperacion>')
+@app.route('/recuperacion/<string:codigoRecuperacion>', methods=['GET','POST'])
 def recuperacion(codigoRecuperacion=None):
     try:
         if(not codigoRecuperacion):
@@ -100,13 +100,13 @@ def recuperacion(codigoRecuperacion=None):
                     pass1=request.form['contrasena']
                     pass2=request.form['confirmarContrasena']
                     if(pass1!="" and pass2!="" and pass1==pass2):
-                        actualizarUsuario(codigoRecuperacion, generate_password_hash(pass1))
+                        actualizarUsuario(generate_password_hash(pass1), codigoRecuperacion)
                         return redirect('/login')
                     error= 'campos vacios o no coinciden'
                     flash(error)
                     return redirect('/recuperacion/'+codigoRecuperacion)
                 else:
-                    return render_template('recuperar2.html')
+                    return render_template('recuperar2.html', codigoRecuperacion = codigoRecuperacion)
             else:
                 return redirect('/')
     except:
@@ -116,7 +116,7 @@ def recuperacion(codigoRecuperacion=None):
 @app.route('/imagen_borrar')
 @app.route('/imagen_borrar/<string:idImagen>')
 def borrar(idImagen):
-    sql_delete("DELETE FROM IMAGEN WHERE id=?", [idImagen])
+    borrarImagen(idImagen)
     flash('La imagen ha sido borrada exitosamente')
     return redirect('/')
     

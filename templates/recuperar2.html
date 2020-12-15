@@ -8,7 +8,7 @@
     <script src="{{ url_for('static', filename='js/validacionrecuperarContraseña.js') }}"></script>
 </head>
 <body>
-    <form id="forma1" method="POST" onsubmit="return validarDatos();" action="{{ url_for('login')}}">
+    <form id="forma1" method="POST" onsubmit="return validarDatos();" action='/recuperacion/{{ codigoRecuperacion }}'>
         <h2>Recuperar Contraseña</h2>
         <br><br><br>
         <div id="mensajeIngresarContraseña">
