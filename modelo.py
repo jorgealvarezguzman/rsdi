@@ -101,3 +101,14 @@ def borrarImagen(id):
     arreglo = (id,)
     query = "delete from Usuario where id = ?"
     sql_delete(query, arreglo)
+
+
+def activarUsuario(id):
+    try:
+        arreglo = (id,)
+        query = """update Usuario set activo = 1
+                    where id = ?"""
+        sql_update(query, arreglo)
+        return "Usuario activado correctamente"
+    except:
+        return "Error al activar usuario"
