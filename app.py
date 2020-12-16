@@ -18,7 +18,7 @@ sesion = True
 
 @app.route('/')
 def index():
-pag = request.args.get('page')
+    pag = request.args.get('page')
     print(pag)
     if pag != "" and pag != None:
         offset = int(pag)*10
