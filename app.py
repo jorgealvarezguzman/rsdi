@@ -193,9 +193,11 @@ def logout():
 @app.route('/imagen_actualizar/')
 @app.route('/imagen_actualizar/<int:idImagen>')
 def actualizarImagen(idImagen=None):
-    if idImagen:
-        return render_template('actualizarImagen.html', nombre="test", describcion="test", es_publica=True) 
-    return render_template('actualizarImagen.html')
+    if g.usuario:
+        if idImagen:
+            imagen = getImagen(idImagen)
+            return render_template('actualizarImagen.html', nombre = f"{imagen[0][1]}", descripcion = f"{imagen[0][2]}", es_publica = imagen[0][3]) 
+    return redirect("/")
 
 
 @app.route("/login/", methods=('GET', 'POST'))
