@@ -18,6 +18,12 @@ sesion = True
 
 @app.route('/')
 def index():
+
+    #[id,username,password,email]
+    if g.usuario:
+        id_usuario = g.usuario[0]
+        print('id_usuario': id_usuario)
+
     sesion = request.args.get('sesion')
     if sesion == "1":
         return render_template("Dashboard/inicio.html")
@@ -208,7 +214,7 @@ def login():
                                                 error2 = error2, error3 = error3)
                     session.clear()
                     session['id_usuario'] = usuario[0][0]
-                    return redirect('/?sesion=1')
+                    return redirect('/')
                 error = u"El usuario o la contraseña no son validos"
                 return render_template("IniciarSesion.html", error1 = error, usuario = username, password=password)
             else:
@@ -257,4 +263,5 @@ def load_logged_in_user():
         g.usuario = None
     else:
         g.usuario = getUsuario(id_usuario)[0]  # se almacenan los datos de usuario. [id,username,password,email]
+
     
