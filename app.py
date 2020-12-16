@@ -1,6 +1,6 @@
 # encoding: utf-8
 # -*- coding: ascii -*-
-from flask import Flask, render_template, request, redirect, url_for, flash, session, g, make_response
+from flask import Flask, render_template, request, redirect, url_for, flash, session, g, make_response, abort, send_from_directory
 from werkzeug.security import generate_password_hash, check_password_hash
 import yagmail
 import utils
@@ -18,29 +18,38 @@ sesion = True
 
 @app.route('/')
 def index():
-
-    #[id,username,password,email]
+pag = request.args.get('page')
+    print(pag)
+    if pag != "" and pag != None:
+        offset = int(pag)*10
+    else:
+        offset = 0
+    loteImgs = getImagenes(True, 10, offset)
+    # [id,username,password,email]
     if g.usuario:
         id_usuario = g.usuario[0]
-        print('id_usuario': id_usuario)
-
-    sesion = request.args.get('sesion')
-    if sesion == "1":
-        return render_template("Dashboard/inicio.html")
+        #print('id_usuario: '+ str(id_usuario))
+        return render_template("Dashboard/inicio.html", images = loteImgs)
     else:
-        return render_template("Principal/inicio.html")
+        return render_template("Principal/inicio.html", images = loteImgs)
+
 
 
 @app.route('/imagen_descargar')
-@app.route('/imagen_descargar/<string:idImagen>')
+@app.route('/imagen_descargar/<int:idImagen>')
 def descargar(idImagen=None):
-    imagen = request.args.get('imagen')
-    return render_template("Dashboard/descargar.html", imagen=imagen)
+    dataImagen = getImagen(idImagen)
+    print('/static/uploads/'+str(dataImagen[0][4]))
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename=dataImagen[0][4], as_attachment=True)
+    #return render_template("Dashboard/descargar.html", imagen=imagen)
 
 
 @app.route('/imagen_guardar', methods=["POST"])
 def imagen_guardar():
     if request.method == 'POST':
+        if g.usuario:
+            id_usuario = g.usuario[0]
+            # print('id_usuario: '+ str(id_usuario))
         nombre = request.form['titulo']
         desc = request.form['form-description']
         acceso = request.form['form-privacy']
@@ -64,7 +73,7 @@ def imagen_guardar():
                 imagen_file.save(os.path.join(app.config['UPLOAD_FOLDER'], destino))
 
                 #algoritmo para almacenar los datos de la imagen en DB
-                img_data_to_db = crearImagen(nombre, desc, publica, destino, 1)
+                img_data_to_db = crearImagen(nombre, desc, publica, destino, id_usuario)
                 if img_data_to_db == "Imagen creada exitosamente":
                     return redirect("/imagen_crear?msg=guardados")
 
