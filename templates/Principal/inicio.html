@@ -86,104 +86,21 @@
 
         <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-public">
-            <div class="portfolio-img"><img src="/static/img/portfolio/portfolio-1.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>Crema Spa</h4>
-              <a href="/static/img/portfolio/portfolio-1.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Ver"><i class="bx bx-camera"></i></a>
-              <a href="/imagen_descargar" class="details-link" title="Descargar"><i class="bx bx-download"></i></a>
-              <a href="/imagen_borrar" class="delete-link" title="Eliminar"><i class="bx bx-trash"></i></a>
-              <a href="/imagen_actualizar" class="edit-link" title="Actualizar"><i class="bx bx-edit"></i></a>
-            </div>
-          </div>
+          <!-- iteracion dinamica para renderizacion de las imagenes -->
+          {% for image in images %}
 
-          <div class="col-lg-4 col-md-6 portfolio-item filter-private">
-            <div class="portfolio-img"><img src="/static/img/portfolio/portfolio-2.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>Energy cafe</h4>
-              <a href="/static/img/portfolio/portfolio-2.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Ver"><i class="bx bx-camera"></i></a>
-              <a href="/imagen_descargar" class="details-link" title="Descargar"><i class="bx bx-download"></i></a>
-              <a href="/imagen_borrar" class="delete-link" title="Eliminar"><i class="bx bx-trash"></i></a>
-              <a href="/imagen_actualizar" class="edit-link" title="Actualizar"><i class="bx bx-edit"></i></a>
+            <div class="col-lg-4 col-md-6 portfolio-item filter-public">
+              <div class="portfolio-img"><img src="/static/uploads/{{ image[4] }}" class="img-fluid" alt=""></div>
+              <div class="portfolio-info">
+                <h4>{{ image[1] }}</h4>
+                <a href="/static/uploads/{{ image[4] }}" data-gall="portfolioGallery" class="venobox preview-link" title="Ver"><i class="bx bx-camera"></i></a>
+                <a href="/imagen_ver/{{ image[0] }}" class="details-link" title="Visualizar"><i class="bx bx-download"></i></a>
+                <!-- <a href="/imagen_descargar?imagen=portfolio-1.jpg" class="details-link" title="Descargar"><i class="bx bx-download"></i></a> -->
+                <a href="/imagen_borrar/{{ image[0] }}" class="delete-link" title="Eliminar"><i class="bx bx-trash"></i></a>
+                <a href="/imagen_actualizar/{{ image[0] }}" class="edit-link" title="Actualizar"><i class="bx bx-edit"></i></a>
+              </div>
             </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-public">
-            <div class="portfolio-img"><img src="/static/img/portfolio/portfolio-3.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>Natural</h4>
-              <a href="/static/img/portfolio/portfolio-3.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Ver"><i class="bx bx-camera"></i></a>
-              <a href="/imagen_descargar" class="details-link" title="Descargar"><i class="bx bx-download"></i></a>
-              <a href="/imagen_borrar" class="delete-link" title="Eliminar"><i class="bx bx-trash"></i></a>
-              <a href="/imagen_actualizar" class="edit-link" title="Actualizar"><i class="bx bx-edit"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-private">
-            <div class="portfolio-img"><img src="/static/img/portfolio/portfolio-4.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>Artesania</h4>
-              <a href="/static/img/portfolio/portfolio-4.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Ver"><i class="bx bx-camera"></i></a>
-              <a href="/imagen_descargar" class="details-link" title="Descargar"><i class="bx bx-download"></i></a>
-              <a href="/imagen_borrar" class="delete-link" title="Eliminar"><i class="bx bx-trash"></i></a>
-              <a href="/imagen_actualizar" class="edit-link" title="Actualizar"><i class="bx bx-edit"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-private">
-            <div class="portfolio-img"><img src="/static/img/portfolio/portfolio-5.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>Escritorio</h4>
-              <a href="/static/img/portfolio/portfolio-5.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Ver"><i class="bx bx-camera"></i></a>
-              <a href="/imagen_descargar" class="details-link" title="Descargar"><i class="bx bx-download"></i></a>
-              <a href="/imagen_borrar" class="delete-link" title="Eliminar"><i class="bx bx-trash"></i></a>
-              <a href="/imagen_actualizar" class="edit-link" title="Actualizar"><i class="bx bx-edit"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-public">
-            <div class="portfolio-img"><img src="/static/img/portfolio/portfolio-6.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>Sun Glasses</h4>
-              <a href="/static/img/portfolio/portfolio-6.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Ver"><i class="bx bx-camera"></i></a>
-              <a href="/imagen_descargar" class="details-link" title="Descargar"><i class="bx bx-download"></i></a>
-              <a href="/imagen_borrar" class="delete-link" title="Eliminar"><i class="bx bx-trash"></i></a>
-              <a href="/imagen_actualizar" class="edit-link" title="Actualizar"><i class="bx bx-edit"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-public">
-            <div class="portfolio-img"><img src="/static/img/portfolio/portfolio-7.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>Fotografia</h4>
-              <a href="/static/img/portfolio/portfolio-7.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Ver"><i class="bx bx-camera"></i></a>
-              <a href="/imagen_descargar" class="details-link" title="Descargar"><i class="bx bx-download"></i></a>
-              <a href="/imagen_borrar" class="delete-link" title="Eliminar"><i class="bx bx-trash"></i></a>
-              <a href="/imagen_actualizar" class="edit-link" title="Actualizar"><i class="bx bx-edit"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-public">
-            <div class="portfolio-img"><img src="/static/img/portfolio/portfolio-8.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>Relax</h4>
-              <a href="/static/img/portfolio/portfolio-8.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Ver"><i class="bx bx-camera"></i></a>
-              <a href="/imagen_descargar" class="details-link" title="Descargar"><i class="bx bx-download"></i></a>
-              <a href="/imagen_borrar" class="delete-link" title="Eliminar"><i class="bx bx-trash"></i></a>
-              <a href="/imagen_actualizar" class="edit-link" title="Actualizar"><i class="bx bx-edit"></i></a>
-            </div>
-          </div>
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-public">
-            <div class="portfolio-img"><img src="/static/img/portfolio/portfolio-9.jpg" class="img-fluid" alt=""></div>
-            <div class="portfolio-info">
-              <h4>Que hora es?</h4>
-              <a href="/static/img/portfolio/portfolio-9.jpg" data-gall="portfolioGallery" class="venobox preview-link" title="Ver"><i class="bx bx-camera"></i></a>
-              <a href="/imagen_descargar" class="details-link" title="Descargar"><i class="bx bx-download"></i></a>
-              <a href="/imagen_borrar" class="delete-link" title="Eliminar"><i class="bx bx-trash"></i></a>
-              <a href="/imagen_actualizar" class="edit-link" title="Actualizar"><i class="bx bx-edit"></i></a>
-            </div>
-          </div>
+          {% endfor %}
 
         </div>
 
