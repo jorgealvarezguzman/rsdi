@@ -84,12 +84,12 @@ def actualizarUsuario(password, id):
         return "Error al actualizar la contraseña"
 
 
-def actualizarImg(nombre, descripcion, publica, url, id):
+def actualizarImg(nombre, descripcion, publica, id):
     try:
         date = datetime.now()
-        arreglo = (nombre, descripcion, publica, url, date, id)
+        arreglo = (nombre, descripcion, publica, date, id)
         query = """update Imagen set nombre = ?, descripcion = ?, 
-                    publica = ?, url = ?, fecha = ?
+                    publica = ?, fecha = ?
                     where id = ?"""
         sql_update(query, arreglo)
         return "Imagen actualizada correctamente"
