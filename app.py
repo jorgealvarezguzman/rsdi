@@ -6,7 +6,6 @@ import yagmail
 import utils
 import os
 from modelo import *
-#from flask import jsonify
 
 app = Flask(__name__)
 app.secret_key = os.urandom( 24 )
@@ -77,13 +76,10 @@ def imagen_guardar():
                 if img_data_to_db == "Imagen creada exitosamente":
                     return redirect("/imagen_crear?msg=guardados")
 
-
-            #return jsonify(mensaje='Imagen guardada con exito', tipo="ok")
         else:
             return redirect("/imagen_crear?msg=datos")
     else:
         return redirect("/imagen_crear")
-        #return jsonify(mensaje='Lo sentimos, no se puede acceder al recurso', tipo="bad")
 
 
 @app.route('/recuperacion', methods=['GET','POST'])
@@ -197,9 +193,11 @@ def logout():
 @app.route('/imagen_actualizar/')
 @app.route('/imagen_actualizar/<int:idImagen>')
 def actualizarImagen(idImagen=None):
-    if idImagen:
-        return render_template('actualizarImagen.html', nombre="test", describcion="test", es_publica=True) 
-    return render_template('actualizarImagen.html')
+    if g.usuario:
+        if idImagen:
+            imagen = getImagen(idImagen)
+            return render_template('actualizarImagen.html', nombre = f"{imagen[0][1]}", descripcion = f"{imagen[0][2]}", es_publica = imagen[0][3]) 
+    return redirect("/")
 
 
 @app.route("/login/", methods=('GET', 'POST'))
