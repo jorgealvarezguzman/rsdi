@@ -29,6 +29,13 @@ def getImagen(id):
     imagen = sql_read(query, arreglo)
     return imagen
 
+def getImagenByUser(id_usuario):
+    arreglo = (id_usuario,)
+    query = """select * from Imagen 
+                where id_usuario = ?"""
+    imagen = sql_read(query, arreglo)
+    return imagen
+
 
 def getImagenes(acceso, limite, offset):
     arreglo = (acceso, limite, offset)
@@ -75,40 +82,56 @@ def crearImagen(nombre, descripcion, publica, url, id_usuario):
 
 def actualizarUsuario(password, id):
     try:
+        respuesta = None
         arreglo = (password, id)
         query = """update Usuario set password = ?
                     where id = ?"""
-        sql_update(query, arreglo)
-        return "Contraseña actualizada correctamente"
+        respuesta = sql_update(query, arreglo)
+        if respuesta is not None:
+            return "Contraseña actualizada correctamente"
+        
+        return "Error al actualizar la contraseña"
     except:
         return "Error al actualizar la contraseña"
 
 
 def actualizarImg(nombre, descripcion, publica, id):
     try:
+        respuesta = None
         date = datetime.now()
         arreglo = (nombre, descripcion, publica, date, id)
         query = """update Imagen set nombre = ?, descripcion = ?, 
                     publica = ?, fecha = ?
                     where id = ?"""
-        sql_update(query, arreglo)
-        return "Imagen actualizada correctamente"
+        respuesta = sql_update(query, arreglo)
+        if respuesta is not None:
+            return "Imagen actualizada correctamente"
+
+        return "Error al actualizar la imagen"
     except:
         return "Error al actualizar la imagen"
 
 
 def borrarImagen(id):
+    respuesta = None
     arreglo = (id,)
-    query = "delete from Usuario where id = ?"
-    sql_delete(query, arreglo)
+    query = "delete from Imagen where id = ?"
+    respuesta = sql_delete(query, arreglo)
+    if respuesta is not None:
+        return True
+    return False
 
 
 def activarUsuario(id):
     try:
+        respuesta = None
         arreglo = (id,)
         query = """update Usuario set activo = 1
                     where id = ?"""
-        sql_update(query, arreglo)
-        return "Usuario activado correctamente"
+        respuesta = sql_update(query, arreglo)
+        if respuesta is not None:
+            return "Usuario activado correctamente"
+
+        return "Error al activar usuario"
     except:
         return "Error al activar usuario"

@@ -118,9 +118,9 @@
     aos_init();
   });
 
-  $(".delete-link").click(function(e){
-    e.preventDefault();
-    confirm("Desea eliminar esta imagen?");
-  })
+  // $(".delete-link").click(function(e){
+  //   e.preventDefault();
+  //   confirm("Desea eliminar esta imagen?");
+  // })
 
 })(jQuery);

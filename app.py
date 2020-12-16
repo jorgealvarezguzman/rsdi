@@ -43,13 +43,13 @@ def descargar(idImagen=None):
 @app.route('/imagen_guardar', methods=["POST"])
 def imagen_guardar():
     if request.method == 'POST':
-        print(request.form)
         if g.usuario:
             id_usuario = g.usuario[0]
             # print('id_usuario: '+ str(id_usuario))
 
         if "Actualizar" in request.form:
             btnActualizar = request.form["Actualizar"]
+            id = request.form['id_imagen']
         else:
             btnActualizar = ""
 
@@ -57,6 +57,7 @@ def imagen_guardar():
             btnCrear = request.form["subir"]
         else:
             btnCrear = ""
+
         nombre = request.form['titulo']
         desc = request.form['form-description']
         acceso = request.form['form-privacy']
@@ -71,11 +72,12 @@ def imagen_guardar():
         #validamos si el origen es actualizar o crear
         if btnActualizar == "Actualizar":
             if nombre != "" and desc != "" and acceso != "":
-                updateImg = actualizarImg(nombre, desc, publica, id_usuario)
+                updateImg = actualizarImg(nombre, desc, publica, id)
                 if updateImg == "Imagen actualizada correctamente":
-                    return "Imagen actualizada con exito!"
+                    
+                    return redirect('/')
                 else:
-                    return "Negativo"
+                    return redirect('/imagen_actualizar/'+str(id))
 
         elif btnCrear == "subir":
             if nombre != "" and desc != "" and acceso != "" and imagen_file != "":
@@ -213,7 +215,8 @@ def actualizarImagen(idImagen=None):
     if g.usuario:
         if idImagen:
             imagen = getImagen(idImagen)
-            return render_template('actualizarImagen.html', nombre = f"{imagen[0][1]}", descripcion = f"{imagen[0][2]}", es_publica = imagen[0][3]) 
+            return render_template('actualizarImagen.html', nombre = f"{imagen[0][1]}", 
+                    descripcion = f"{imagen[0][2]}", es_publica = imagen[0][3], id = idImagen) 
     return redirect("/")
 
 
