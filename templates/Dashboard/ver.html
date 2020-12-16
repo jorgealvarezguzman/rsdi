@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-  <title>RSDI - Dashboard</title>
+  <title>Descargar imagen - RSDI</title>
   <meta content="Red social de imagenes" name="descriptison">
   <meta content="imagenes, red social" name="keywords">
 
@@ -57,67 +57,29 @@
 
   <main id="main">
 
-    <section>
-      <div class="section-title">
-        <h2>Red Social De Imagenes</h2>
-        <p>Sube, comparte, busca y descarga tus imagenes.</p>
-      </div>
+    <section id="portfolio-details" class="portfolio-details">
+      <div class="container">
 
-      <div id="searcher">
-
-        <div class="searcher-newsletter">
-          <div class="container">
-            <div class="row justify-content-center">
-              <div class="col-lg-6">
-                <h4>Busca todas las imagenes</h4>                
-                <form action="/" method="get">
-                  <input type="text" name="buscar" placeholder="Palabra clave..."><input type="submit" value="Buscar">
-                </form>
-              </div>
-            </div>
+        <div class="portfolio-details-container">
+          <img src="/static/uploads/{{ imagen[4] }}" class="img-fluid" alt="">
+          
+          <div class="portfolio-info">
+            <h3>{{ imagen[1] }}</h3>
+            <ul>
+              <li><strong>Descargas: </strong>: 1.6M</li>
+              <li><strong>Propietario</strong>: Eddy Hide</li>
+              <li><strong>Fecha</strong>: {{ imagen[6]}}</li>
+              <li><a class="btn btn-success" href="/imagen_descargar/{{ imagen[0] }}">Descargar</a></li>
+            </ul>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <section id="portfolio" class="portfolio">      
-
-      <div class="container" data-aos="fade-up">
-
-        
-        <!--
-        <ul id="portfolio-flters" class="d-flex justify-content-center" data-aos="fade-up" data-aos-delay="100">
-          <li data-filter="*" class="filter-active">Todo</li>
-          <li data-filter=".filter-public">Publicas</li>
-          <li data-filter=".filter-private">Privadas</li>
-        </ul>
-        -->
-
-        <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200">
-
-          <!-- iteracion dinamica para renderizacion de las imagenes -->
-          {% for image in images %}
-
-            <div class="col-lg-4 col-md-6 portfolio-item filter-public">
-              <div class="portfolio-img"><img src="/static/uploads/{{ image[4] }}" class="img-fluid" alt=""></div>
-              <div class="portfolio-info">
-                <h4>{{ image[1] }}</h4>
-                <a href="/static/uploads/{{ image[4] }}" data-gall="portfolioGallery" class="venobox preview-link" title="Ver"><i class="bx bx-camera"></i></a>
-                <a href="/imagen_ver/{{ image[0] }}" class="details-link" title="Visualizar"><i class="bx bx-download"></i></a>
-                <!-- <a href="/imagen_descargar?imagen=portfolio-1.jpg" class="details-link" title="Descargar"><i class="bx bx-download"></i></a> -->
-                <a href="/imagen_borrar/{{ image[0] }}" class="delete-link" title="Eliminar"><i class="bx bx-trash"></i></a>
-                <a href="/imagen_actualizar/{{ image[0] }}" class="edit-link" title="Actualizar"><i class="bx bx-edit"></i></a>
-              </div>
-            </div>
-          {% endfor %}
-
-        </div>
+        </div>       
 
       </div>
     </section>
 
-  </main>  
-
+  </main>
+  
   <footer id="footer">    
 
     <div class="container footer-bottom clearfix">
