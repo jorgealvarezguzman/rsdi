@@ -13,9 +13,7 @@ app.secret_key = os.urandom( 24 )
 app.permanent_session_lifetime = timedelta(days=365)
 app.config['DATABASE'] = 'rsdi.db'
 app.secret_key = os.urandom(12)
-app.config['UPLOAD_FOLDER'] = "./uploads"
-sesion = True
-
+app.config['UPLOAD_FOLDER'] = "./static/uploads"
 
 @app.route('/')
 def index():
@@ -34,9 +32,6 @@ def index():
     else:
         return render_template("Principal/inicio.html", images = loteImgs)
 
-
-
-@app.route('/imagen_descargar')
 @app.route('/imagen_descargar/<int:idImagen>')
 def descargar(idImagen=None):
     dataImagen = getImagen(idImagen)
@@ -48,36 +43,56 @@ def descargar(idImagen=None):
 @app.route('/imagen_guardar', methods=["POST"])
 def imagen_guardar():
     if request.method == 'POST':
+        print(request.form)
         if g.usuario:
             id_usuario = g.usuario[0]
             # print('id_usuario: '+ str(id_usuario))
+
+        if "Actualizar" in request.form:
+            btnActualizar = request.form["Actualizar"]
+        else:
+            btnActualizar = ""
+
+        if "subir" in request.form:
+            btnCrear = request.form["subir"]
+        else:
+            btnCrear = ""
         nombre = request.form['titulo']
         desc = request.form['form-description']
         acceso = request.form['form-privacy']
-        imagen_file = request.files['imagen']
-        if nombre != "" and desc != "" and acceso != "" and imagen_file != "":
-            # Definimos la ruta base
-            #BASE_DIR = dirname(dirname(abspath(__file__)))
-            BASE_DIR_PUB = "publics"
-            BASE_DIR_PRV = "privates"
+        if "imagen" in request.files:
+            imagen_file = request.files['imagen']
 
-            #algoritmo para almacenar la imagen en carpeta destino
-            if imagen_file.filename:
-                if acceso == "public":
-                    destino = BASE_DIR_PUB+"/"+str(imagen_file.filename)
-                    publica = 1
-                elif acceso == "private":
-                    destino = BASE_DIR_PRV + "/" + str(imagen_file.filename)
-                    publica = 0
+        if acceso == "public":
+            publica = 1
+        elif acceso == "private":
+            publica = 0
 
-                #Move file to UPLAOD_FOLDER
-                imagen_file.save(os.path.join(app.config['UPLOAD_FOLDER'], destino))
+        #validamos si el origen es actualizar o crear
+        if btnActualizar == "Actualizar":
+            if nombre != "" and desc != "" and acceso != "":
+                updateImg = actualizarImg(nombre, desc, publica, id_usuario)
+                if updateImg == "Imagen actualizada correctamente":
+                    return "Imagen actualizada con exito!"
+                else:
+                    return "Negativo"
 
-                #algoritmo para almacenar los datos de la imagen en DB
-                img_data_to_db = crearImagen(nombre, desc, publica, destino, id_usuario)
-                if img_data_to_db == "Imagen creada exitosamente":
-                    return redirect("/imagen_crear?msg=guardados")
+        elif btnCrear == "subir":
+            if nombre != "" and desc != "" and acceso != "" and imagen_file != "":
+                #algoritmo para almacenar la imagen en carpeta destino
+                if imagen_file.filename:
+                    if publica == 1:
+                        destino = "publics/" + str(imagen_file.filename)
+                    elif publica == 0:
+                        destino = "privates/" + str(imagen_file.filename)
 
+                    #Move file to UPLAOD_FOLDER
+                    imagen_file.save(os.path.join(app.config['UPLOAD_FOLDER'], destino))
+
+                    #algoritmo para almacenar los datos de la imagen en DB
+                    img_data_to_db = crearImagen(nombre, desc, publica, destino, id_usuario)
+                    if img_data_to_db == "Imagen creada exitosamente":
+                        return redirect("/imagen_crear?msg=guardados")
         else:
             return redirect("/imagen_crear?msg=datos")
     else:
@@ -262,10 +277,26 @@ def activacion(codigoActivacion):
     return render_template("IniciarSesion.html")
 
 
-@app.route('/imagen_ver/<string:idImagen>')
+@app.route('/imagen_ver/<int:idImagen>')
 def obtenerImagen(idImagen=None):
+    dataImagen = getImagen(idImagen)
+    datosArray = []
+    errorNotFound = False
+    if len(dataImagen) > 0:
+        for row in dataImagen:
+            datosArray.append(row['id'])
+            datosArray.append(row['nombre'])
+            datosArray.append(row['descripcion'])
+            datosArray.append(row['publica'])
+            datosArray.append(row['url'])
+            datosArray.append(row['id_usuario'])
+            datosArray.append(row['fecha'])
+    else:
+        errorNotFound = True
+        abort(404)
 
-    return redirect('/')
+    if errorNotFound == False:
+        return render_template("Dashboard/ver.html", imagen = datosArray)
 
 
 @app.before_request
