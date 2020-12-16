@@ -6,7 +6,6 @@ import yagmail
 import utils
 import os
 from modelo import *
-#from flask import jsonify
 
 app = Flask(__name__)
 app.secret_key = os.urandom( 24 )
@@ -77,13 +76,10 @@ def imagen_guardar():
                 if img_data_to_db == "Imagen creada exitosamente":
                     return redirect("/imagen_crear?msg=guardados")
 
-
-            #return jsonify(mensaje='Imagen guardada con exito', tipo="ok")
         else:
             return redirect("/imagen_crear?msg=datos")
     else:
         return redirect("/imagen_crear")
-        #return jsonify(mensaje='Lo sentimos, no se puede acceder al recurso', tipo="bad")
 
 
 @app.route('/recuperacion', methods=['GET','POST'])
