@@ -2,6 +2,7 @@
 # -*- coding: ascii -*-
 from flask import Flask, render_template, request, redirect, url_for, flash, session, g, make_response, abort, send_from_directory
 from werkzeug.security import generate_password_hash, check_password_hash
+from datetime import timedelta
 import yagmail
 import utils
 import os
@@ -9,6 +10,7 @@ from modelo import *
 
 app = Flask(__name__)
 app.secret_key = os.urandom( 24 )
+app.permanent_session_lifetime = timedelta(days=365)
 app.config['DATABASE'] = 'rsdi.db'
 app.secret_key = os.urandom(12)
 app.config['UPLOAD_FOLDER'] = "./uploads"
@@ -221,6 +223,10 @@ def login():
                                                 error2 = error2, error3 = error3)
                     session.clear()
                     session['id_usuario'] = usuario[0][0]
+                    if recordarme:
+                        session.permanent = True
+                    else:
+                        session.permanent = False
                     return redirect('/')
                 error = u"El usuario o la contraseña no son validos"
                 return render_template("IniciarSesion.html", error1 = error, usuario = username, password=password)
