@@ -1,6 +1,6 @@
 # encoding: utf-8
 # -*- coding: ascii -*-
-from flask import Flask, render_template, request, redirect, url_for, flash, session, g
+from flask import Flask, render_template, request, redirect, url_for, flash, session, g, make_response
 from werkzeug.security import generate_password_hash, check_password_hash
 import yagmail
 import utils
@@ -80,6 +80,7 @@ def recuperacion(codigoRecuperacion=None):
                 error=None
                 email = request.form['email']
                 usuario =getUsuarioByEmail(email)
+
                 if not utils.isEmailValid(email):
                     error = 'Direccion de correo no valida'
                     flash(error)
@@ -88,26 +89,33 @@ def recuperacion(codigoRecuperacion=None):
                     error= 'Email no valido'
                     flash(error)
                     return render_template('recuperar1.html')
+                
                 yag = yagmail.SMTP('misiontic2022grupo11@gmail.com','2022Grupo11')
-                yag.send(to=email,subject='Recuperacion de contraseña',contents='Entra al siguiente link para reestablecer tu cuenta: http://127.0.0.1:5000/recuperacion/'+usuario[0][0])
+                yag.send(to=email,subject='Recuperacion de contraseña',
+                                  contents=f"""Entra al siguiente link para reestablecer tu cuenta: 
+                                               http://127.0.0.1:5000/recuperacion/{generate_password_hash('recover')}?email={email}""")
                 return redirect(url_for('login'))
             else:
                 error = 'revise su correo'
                 flash(error)
                 return render_template('recuperar1.html')
         else:
-            if(getUsuario(codigoRecuperacion) !=[]):
+            
+            if(check_password_hash(codigoRecuperacion, 'recover')):
                 if (request.method== 'POST'):
                     pass1=request.form['contrasena']
-                    pass2=request.form['confirmarContrasena']
+                    pass2=request.form['confirmarContrasena']            
                     if(pass1!="" and pass2!="" and pass1==pass2):
-                        actualizarUsuario(generate_password_hash(pass1), codigoRecuperacion)
+                        actualizarUsuario(generate_password_hash(pass1), request.cookies.get('idUsuario'))
                         return redirect('/login')
                     error= 'campos vacios o no coinciden'
                     flash(error)
                     return redirect('/recuperacion/'+codigoRecuperacion)
                 else:
-                    return render_template('recuperar2.html', codigoRecuperacion = codigoRecuperacion)
+                    usuario = getUsuarioByEmail(request.args.get('email'))
+                    response = make_response(render_template('recuperar2.html', codigoRecuperacion = codigoRecuperacion))
+                    response.set_cookie('idUsuario', f'{usuario[0][0]}')
+                    return response
             else:
                 return redirect('/')
     except:
