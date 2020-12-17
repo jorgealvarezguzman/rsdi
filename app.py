@@ -184,12 +184,16 @@ def registro():
                 flash(error)
                 return render_template("registro.html")
 
-            if getUsuarioByEmail(email) != []:
-                error="Usuario ya existente"
-                flash(error)
-                return redirect(url_for('registro'))
+            # if getUsuarioByEmail(email) != []:
+            #     error="Usuario ya existente"
+            #     flash(error)
+            #     return redirect(url_for('registro'))
             else:
-                crearUsuario(username, generate_password_hash(password), email)
+                respuesta = crearUsuario(username, generate_password_hash(password), email)
+                if respuesta != "Usuario creado exitosamente":
+                    flash(str(respuesta))
+                    return redirect(url_for('registro'))
+
 
             yag = yagmail.SMTP('misiontic2022grupo11@gmail.com', '2022Grupo11')
             yag.send(to=email, subject='Activa tu cuenta',
