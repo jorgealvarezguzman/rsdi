@@ -302,6 +302,8 @@ def activacion(codigoActivacion):
 @app.route('/imagen_ver/<int:idImagen>')
 def obtenerImagen(idImagen=None):
     dataImagen = getImagen(idImagen)
+    id_usuario = dataImagen[0][5]
+    propietario = getUsuario(id_usuario)[0][1]
     datosArray = []
     errorNotFound = False
     if len(dataImagen) > 0:
@@ -313,6 +315,7 @@ def obtenerImagen(idImagen=None):
             datosArray.append(row['url'])
             datosArray.append(row['id_usuario'])
             datosArray.append(row['fecha'])
+            datosArray.append(propietario)
     else:
         errorNotFound = True
         abort(404)
