@@ -315,4 +315,7 @@ def load_logged_in_user():
     else:
         g.usuario = getUsuario(id_usuario)[0]  # se almacenan los datos de usuario. [id,username,password,email]
 
-    
+
+
+if __name__ == '__main__':
+    app.run( host='127.0.0.1', port =443, ssl_context=('certificadoRSDI.pem', 'llaveprivadaRSDI.pem') )
