@@ -306,6 +306,19 @@ def obtenerImagen(idImagen=None):
         return render_template("Dashboard/ver.html", imagen = datosArray)
 
 
+@app.route('/portafolio')
+def portafolio():
+    if g.usuario:
+        id_usuario = g.usuario[0]
+    else:
+        return redirect("/")
+    loteImgs = getImagenByUser(id_usuario)
+    if(len(loteImgs) > 0):
+        return render_template('Dashboard/portafolio.html', images = loteImgs)
+    else:
+        return render_template('Dashboard/portafolio.html', notImages = True)
+
+
 @app.before_request
 def load_logged_in_user():
     id_usuario = session.get('id_usuario')
