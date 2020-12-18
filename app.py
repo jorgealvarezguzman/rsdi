@@ -15,10 +15,11 @@ app.config['DATABASE'] = 'rsdi.db'
 app.secret_key = os.urandom(12)
 app.config['UPLOAD_FOLDER'] = "./static/uploads"
 
+
 @app.route('/')
 def index():
     pag = request.args.get('page')
-    print(pag)
+
     if pag != "" and pag != None:
         offset = int(pag)*10
     else:
@@ -31,6 +32,24 @@ def index():
         return render_template("Dashboard/inicio.html", images = loteImgs)
     else:
         return render_template("Principal/inicio.html", images = loteImgs)
+
+
+@app.route('/buscar/', methods=['GET', 'POST'])
+def buscar():
+    try:
+        if request.method == 'POST':
+            keyword = request.form["buscar"]
+            if g.usuario:
+                id_usuario = g.usuario[0]
+                imagenes = getImagenesBusqueda(keyword, id_usuario)
+                return render_template("Dashboard/inicio.html", images = imagenes)
+            else:
+                imagenes = getImagenesBusqueda(keyword, None)
+                print(imagenes)
+                return render_template("Principal/inicio.html", images = imagenes)
+    except:
+        return redirect("/")
+
 
 @app.route('/imagen_descargar/<int:idImagen>')
 def descargar(idImagen=None):
@@ -184,10 +203,6 @@ def registro():
                 flash(error)
                 return render_template("registro.html")
 
-            # if getUsuarioByEmail(email) != []:
-            #     error="Usuario ya existente"
-            #     flash(error)
-            #     return redirect(url_for('registro'))
             else:
                 respuesta = crearUsuario(username, generate_password_hash(password), email)
                 if respuesta != "Usuario creado exitosamente":

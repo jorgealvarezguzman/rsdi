@@ -70,7 +70,7 @@
             <div class="row justify-content-center">
               <div class="col-lg-6">
                 <h4>Busca todas las imagenes</h4>                
-                <form action="/" method="get">
+                <form action="{{ url_for('buscar')}}" method="post">
                   <input type="text" name="buscar" placeholder="Palabra clave..."><input type="submit" value="Buscar">
                 </form>
               </div>
