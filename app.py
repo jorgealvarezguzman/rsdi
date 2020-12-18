@@ -45,7 +45,6 @@ def buscar():
                 return render_template("Dashboard/inicio.html", images = imagenes)
             else:
                 imagenes = getImagenesBusqueda(keyword, None)
-                print(imagenes)
                 return render_template("Principal/inicio.html", images = imagenes)
     except:
         return redirect("/")
