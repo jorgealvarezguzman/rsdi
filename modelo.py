@@ -135,3 +135,11 @@ def activarUsuario(id):
         return "Error al activar usuario"
     except:
         return "Error al activar usuario"
+
+
+def getImagenesBusqueda(keyword, id_usuario):
+    arreglo = (f'%{keyword}%', f'%{keyword}%', id_usuario)
+    query = """SELECT * FROM Imagen 
+                WHERE ((descripcion LIKE ? OR nombre LIKE ?) AND (publica = 1 or (publica = 0 AND id_usuario = ?)))"""
+    imagenes = sql_read(query, arreglo)
+    return imagenes
