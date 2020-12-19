@@ -363,4 +363,4 @@ def load_logged_in_user():
 
 
 if __name__ == '__main__':
-    app.run( host='0.0.0.0', port =443, ssl_context=('certificadoRSDI.pem', 'llaveprivadaRSDI.pem') )
+    app.run( host='127.0.0.1', port =443, ssl_context=('certificadoRSDI.pem', 'llaveprivadaRSDI.pem') )
