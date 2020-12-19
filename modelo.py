@@ -106,6 +106,8 @@ def actualizarImg(nombre, descripcion, publica, id):
         respuesta = sql_update(query, arreglo)
         if respuesta is not None:
             return "Imagen actualizada correctamente"
+        else:
+            return respuesta
 
         return "Error al actualizar la imagen"
     except:
