@@ -107,11 +107,8 @@
               <div class="portfolio-img"><img src="/static/uploads/{{ image[4] }}" class="img-fluid" alt=""></div>
               <div class="portfolio-info">
                 <h4>{{ image[1] }}</h4>
-                <a href="/static/uploads/{{ image[4] }}" data-gall="portfolioGallery" class="venobox preview-link" title="Ver"><i class="bx bx-camera"></i></a>
-                <a href="/imagen_ver/{{ image[0] }}" class="details-link" title="Visualizar"><i class="bx bx-download"></i></a>
-                <!-- <a href="/imagen_descargar?imagen=portfolio-1.jpg" class="details-link" title="Descargar"><i class="bx bx-download"></i></a> -->
-                <a href="/imagen_borrar/{{ image[0] }}" class="delete-link" title="Eliminar"><i class="bx bx-trash"></i></a>
-                <a href="/imagen_actualizar/{{ image[0] }}" class="edit-link" title="Actualizar"><i class="bx bx-edit"></i></a>
+                <a href="/static/uploads/{{ image[4] }}" data-gall="portfolioGallery" class="venobox preview-link" title="Visualizar"><i class="bx bx-camera"></i></a>
+                <a href="/imagen_ver/{{ image[0] }}" class="details-link" title="Descargar"><i class="bx bx-download"></i></a>                
               </div>
             </div>
           {% endfor %}
