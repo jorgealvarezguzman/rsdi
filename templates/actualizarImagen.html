@@ -1,6 +1,41 @@
 <html>
 	<head>
 		<link href="{{ url_for('static', filename = 'css/actualizarImagen.css') }}" rel='stylesheet'>
+		<style>
+			a{
+				outline: none;
+				  text-decoration: none;
+				  display: inline-block;
+				  width: 24.5%;
+				  margin-right: 0.625%;
+				  text-align: center;
+				  line-height: 3;
+				  color: white;
+			}
+
+			li {
+			  display: inline;
+			  text-decoration: none;
+			}
+
+			li:last-child a {
+			  margin-right: 0;
+			}
+
+			a:link, a:visited, a:focus {
+			  background: #1574fe;
+			}
+
+			a:hover {
+			  background: orange;
+			}
+
+			a:active {
+			  background: red;
+			  color: white;
+			}
+
+		</style>
 		<meta charset="utf-8"/>
 		<title>Actualizar Imagen</title>
 		<script src="{{ url_for('static', filename = 'js/drag&drop.js') }}"></script>
@@ -53,6 +88,10 @@
 				<input type="submit" name="Actualizar" value="Actualizar" class='sk-asset sk-Rectangle-2-Copy-3-ED038D5A-8C35-4D6D-8FB6-B59F90065482'/>
 
 			</div>
+
+			<ul style="position: absolute; bottom: 25%; left: 35%; width: 100%;">
+  				<li><a href="/">Volver al inicio</a></li>
+			</ul>
 			</form>
 		</div>
 	</div>
