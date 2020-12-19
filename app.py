@@ -106,11 +106,12 @@ def imagen_guardar():
         if btnActualizar == "Actualizar":
             if nombre != "" and desc != "" and acceso != "":
                 updateImg = actualizarImg(nombre, desc, publica, id)
-                if updateImg == "Imagen actualizada correctamente":
-                    
-                    return redirect('/')
+                if(updateImg == None):
+                    return redirect("/")
                 else:
-                    return redirect('/imagen_actualizar/'+str(id))
+                    return redirect('/imagen_actualizar/' + str(id))
+            else:
+                return redirect('/imagen_actualizar/' + str(id))
 
         elif btnCrear == "subir":
             if nombre != "" and desc != "" and acceso != "" and imagen_file != "":
