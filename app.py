@@ -41,10 +41,26 @@ def buscar():
             if g.usuario:
                 id_usuario = g.usuario[0]
                 imagenes = getImagenesBusqueda(keyword, id_usuario)
-                return render_template("Dashboard/inicio.html", images = imagenes)
+                if imagenes == []:
+                    mensaje1 = 'Lo sentimos, no hemos encontrado nada.'
+                    mensaje2 = 'Por favor, cambie su criterio de búsqueda.'
+                    return render_template("Dashboard/inicio.html", images = imagenes, palabraClave = keyword, 
+                                        mensaje1=mensaje1, mensaje2=mensaje2)
+                else:
+                    mensaje1 = 'Resultado de la busqueda'
+                    return render_template("Dashboard/inicio.html", images = imagenes, palabraClave = keyword, 
+                                        mensaje1=mensaje1)
             else:
                 imagenes = getImagenesBusqueda(keyword, None)
-                return render_template("Principal/inicio.html", images = imagenes)
+                if imagenes == []:
+                    mensaje1 = 'Lo sentimos, no hemos encontrado nada.'
+                    mensaje2 = 'Por favor, cambie su criterio de búsqueda.'
+                    return render_template("Principal/inicio.html", images = imagenes, palabraClave = keyword, 
+                                        mensaje1=mensaje1, mensaje2=mensaje2)
+                else:
+                    mensaje1 = 'Resultado de la busqueda'
+                    return render_template("Principal/inicio.html", images = imagenes, palabraClave = keyword, 
+                                        mensaje1=mensaje1)
     except:
         return redirect("/")
 
@@ -347,4 +363,4 @@ def load_logged_in_user():
 
 
 if __name__ == '__main__':
-    app.run( host='127.0.0.1', port =443, ssl_context=('certificadoRSDI.pem', 'llaveprivadaRSDI.pem') )
+    app.run( host='0.0.0.0', port =443, ssl_context=('certificadoRSDI.pem', 'llaveprivadaRSDI.pem') )

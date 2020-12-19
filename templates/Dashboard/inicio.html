@@ -69,9 +69,14 @@
           <div class="container">
             <div class="row justify-content-center">
               <div class="col-lg-6">
-                <h4>Busca todas las imagenes</h4>                
+                {% if palabraClave and palabraClave != "" %}
+                  <h4>{{ mensaje1 }}</h4>
+                  <h6>{{ mensaje2 }}</h6>
+                {% else %}
+                  <h4>Busca todas las imagenes</h4>
+                {% endif %}                
                 <form action="{{ url_for('buscar')}}" method="post">
-                  <input type="text" name="buscar" placeholder="Palabra clave..."><input type="submit" value="Buscar">
+                  <input type="text" name="buscar" placeholder="Palabra clave..." value="{{ palabraClave }}"><input type="submit" value="Buscar">
                 </form>
               </div>
             </div>
