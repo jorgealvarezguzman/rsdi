@@ -11,7 +11,7 @@ from modelo import *
 app = Flask(__name__)
 app.permanent_session_lifetime = timedelta(days=365)
 app.config['DATABASE'] = 'rsdi.db'
-app.secret_key = os.urandom(12)
+app.secret_key = '123450'
 app.config['UPLOAD_FOLDER'] = "./static/uploads"
 
 
