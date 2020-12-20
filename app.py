@@ -26,17 +26,18 @@ def index():
     loteImgs = getImagenes(True, 10, offset)
     # [id,username,password,email]
     if g.usuario:
-        id_usuario = g.usuario[0]
+        usuario = g.usuario[1]
         #print('id_usuario: '+ str(id_usuario))
-        return render_template("Dashboard/inicio.html", images = loteImgs)
+        return render_template("Dashboard/inicio.html", images = loteImgs, user = usuario)
     else:
         return render_template("Principal/inicio.html", images = loteImgs)
-
 
 @app.route('/buscar/', methods=['GET', 'POST'])
 def buscar():
     try:
         if request.method == 'POST':
+            if g.usuario:
+                usuario = g.usuario[1]
             keyword = request.form["buscar"]
             if g.usuario:
                 id_usuario = g.usuario[0]
@@ -45,11 +46,11 @@ def buscar():
                     mensaje1 = 'Lo sentimos, no hemos encontrado nada.'
                     mensaje2 = 'Por favor, cambie su criterio de búsqueda.'
                     return render_template("Dashboard/inicio.html", images = imagenes, palabraClave = keyword, 
-                                        mensaje1=mensaje1, mensaje2=mensaje2)
+                                        mensaje1=mensaje1, mensaje2=mensaje2, user = usuario)
                 else:
                     mensaje1 = 'Resultado de la busqueda'
                     return render_template("Dashboard/inicio.html", images = imagenes, palabraClave = keyword, 
-                                        mensaje1=mensaje1)
+                                        mensaje1=mensaje1, user = usuario)
             else:
                 imagenes = getImagenesBusqueda(keyword, None)
                 if imagenes == []:
@@ -61,9 +62,6 @@ def buscar():
                     mensaje1 = 'Resultado de la busqueda'
                     return render_template("Principal/inicio.html", images = imagenes, palabraClave = keyword, 
                                         mensaje1=mensaje1)
-        
-        else:
-            return redirect("/")
     except:
         return redirect("/")
 
@@ -339,18 +337,23 @@ def obtenerImagen(idImagen=None):
         abort(404)
 
     if errorNotFound == False:
-        return render_template("Dashboard/ver.html", imagen = datosArray)
+        if(g.usuario):
+            usuario = g.usuario[1]
+        else:
+            usuario = "usuario"
+        return render_template("Dashboard/ver.html", imagen = datosArray, user = usuario)
 
 
 @app.route('/portafolio')
 def portafolio():
     if g.usuario:
         id_usuario = g.usuario[0]
+        usuario = g.usuario[1]
     else:
         return redirect("/")
     loteImgs = getImagenByUser(id_usuario)
     if(len(loteImgs) > 0):
-        return render_template('Dashboard/portafolio.html', images = loteImgs)
+        return render_template('Dashboard/portafolio.html', images = loteImgs, user = usuario)
     else:
         return render_template('Dashboard/portafolio.html', notImages = True)
 
