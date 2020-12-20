@@ -61,6 +61,9 @@ def buscar():
                     mensaje1 = 'Resultado de la busqueda'
                     return render_template("Principal/inicio.html", images = imagenes, palabraClave = keyword, 
                                         mensaje1=mensaje1)
+        
+        else:
+            return redirect("/")
     except:
         return redirect("/")
 
