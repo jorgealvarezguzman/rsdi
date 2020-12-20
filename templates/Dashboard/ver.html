@@ -34,8 +34,8 @@
 
       <nav class="nav-menu d-none d-lg-block">
         <ul>
+          <li><a>{{ user }}</a></li>
           <li class="active"><a href="/">Inicio</a></li>
-          <li><a href="#">Usuario</a></li>
           <li class="drop-down"><a href="">Imagenes</a>
             <ul>
               <li><a href="/imagen_crear">Subir imagen</a></li>
@@ -66,7 +66,6 @@
           <div class="portfolio-info">
             <h3>{{ imagen[1] }}</h3>
             <ul>
-              <li><strong>Descargas: </strong>: 1.6M</li>
               <li><strong>Propietario</strong>: {{ imagen[7] }}</li>
               <li><strong>Fecha</strong>: {{ imagen[6] }}</li>
               <li><a class="btn btn-success" href="/imagen_descargar/{{ imagen[0] }}">Descargar</a></li>
