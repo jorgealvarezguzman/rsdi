@@ -62,6 +62,8 @@ def buscar():
                     mensaje1 = 'Resultado de la busqueda'
                     return render_template("Principal/inicio.html", images = imagenes, palabraClave = keyword, 
                                         mensaje1=mensaje1)
+        else:
+            return redirect("/")
     except:
         return redirect("/")
 
@@ -115,7 +117,7 @@ def imagen_guardar():
                 return redirect('/imagen_actualizar/' + str(id))
 
         elif btnCrear == "subir":
-            if nombre != "" and desc != "" and acceso != "" and imagen_file != "":
+            if nombre != "" and desc != "" and acceso != "" and imagen_file.filename != "":
                 #algoritmo para almacenar la imagen en carpeta destino
                 if imagen_file.filename:
                     if publica == 1:
@@ -130,6 +132,8 @@ def imagen_guardar():
                     img_data_to_db = crearImagen(nombre, desc, publica, destino, id_usuario)
                     if img_data_to_db == "Imagen creada exitosamente":
                         return redirect("/imagen_crear?msg=guardados")
+            else:
+                return redirect("/imagen_crear?msg=datos")
         else:
             return redirect("/imagen_crear?msg=datos")
     else:
